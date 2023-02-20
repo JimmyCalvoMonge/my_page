@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+/* 
+General 
+*/
+
+body {
+  font-family: 'Inconsolata';
+  background: #010101;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1f252b;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(93, 158, 233);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(28, 68, 100);
+}
+
+/* Navbar styles */
+
+.my-navbar{
+  background-color:#090e13;
+}
+
+/*Homepage styles*/
+
+.Home {
+  padding-top: 5%;
+}
+
+.Home hr{
+  width:75%;
+  text-align:right;
+  height:1px;
+  border: none;
+  background-color: rgb(104, 104, 104);
+}
+
+.Home a {
+  text-decoration: none;
+  font-size:12px;
+  color: #1f252b;
+}
+
+.Home a:hover {
+  cursor: pointer;
+}
+
+/* Control a size with media queries */
+
+@media (max-width: 576px) {
+  .Home a {
+    font-size:20px;
+  }
+}
+
+@media (max-width: 475px) {
+  .Home a {
+    font-size:12px;
+  }
+}
+
+.Home .canvas_container{
+  background-color: rgb(2, 2, 2);
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.Home .canvas_container canvas{
+  background-color: rgb(0, 0, 0);
+  border-radius: 5px;
+  width: 85%;
+}
+
+@media (max-width: 475px) {
+  .Home .canvas_container canvas{
+    width: 95%;
+  }
+}
+
+.Home .col-start{
+  margin-top:2%;
+  padding-bottom:2%;
+}
+
+.Home .col-right{
+  margin-top:2%;
+}
+
+.Home .col-start h1{
+  text-align:right;
+  color:white;
+}
+
+.Home .col-start h2{
+  text-align:right;
+  padding-bottom: 10%;
+  font-size:18px;
+  color:white;
+}
+
+.Home .col-start h3{
+  text-align:right;
+  font-size:12x;
+  margin-top:-5%;
+  color:white;
+}
+
+.Home .col-start p{
+  text-align:right;
+  color:white;
+  margin-top:-5%;
+  padding-right:2%;
+}
+
+@media (max-width: 475px) {
+  .Home .col-start p{
+    font-size:12px;
+  }
+}
+
+.Home .col-start hr{
+  background-color: white;
+  margin: auto;
+}
+
+.Home .class1{
+  margin-top: 10%;
+  margin-bottom: 10%;
+  text-align: right;
+}
+
+/* Aboutme styles */
+
+.aboutme{
+  background: #000000;
+  position:absolute;
+  right:15%;
+  left:15%;
+  text-align:center;
+  padding-top: 5%;
+}
+
+@media (max-width: 475px) {
+  .aboutme{
+    right:5%;
+    left:5%;
+  }
+}
+
+.aboutme h1 {
+  color:#bbbbbb;
+  text-align: center;
+}
+
+.aboutme p{
+  color:#bbbbbb;
+  text-align: center;
+}
+
+.aboutme hr{
+  width:75%;
+  text-align:center;
+  height:1px;
+  border: none;
+  background-color: rgb(104, 104, 104);
+}
+
+.aboutme img{
+  border-radius:50%;
+  width: 40%;
+  height: auto;
+}
+
+.aboutme a{
+  color: #2f93d6;
+  text-decoration: none;
+  text-align:center;
+}
+
+.aboutme a:hover{
+  color:#ce711b;
+  text-align:center;
+}
+
+.aboutme .flex-container{
+  display:flex;
+  align-items: center;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-left:5%;
+}
+
+.aboutme .flex-container .col-30{
+  width:25%;
+  vertical-align: center;
+}
+
+.aboutme .flex-container .col-30 button{
+  background-color: #164564;
+  border:none;
+  padding-top:5px;
+  padding-bottom:5px;
+  color:white;
+  border-radius: 5px;
+}
+
+.aboutme .flex-container .col-30-a{
+  width:55%;
+  background-color: #292728;
+  vertical-align: center;
+  border-radius: 5px;
+  padding-left:5%;
+  padding-right:5%;
+}
+
+.aboutme .explanation-container{
+  background-color: rgb(26, 66, 92);
+  border-radius: 5px;
+  padding: 2%;
+  margin-top:5%;
+  margin-bottom:5%;
+}
+
+/* List styles */
+
+.List {
+  background: #000000;
+  position:absolute;
+  right:10%;
+  left:10%;
+  text-align:center;
+  padding-top: 5%;
+}
+
+.List h1 {
+  color:#bbbbbb;
+  text-align: center;
+}
+
+.List h2 {
+  color:#d68334;
+  text-align: center;
+}
+
+.List h3 {
+  color:#0f6fa7;
+}
+
+.List h4 {
+  color:#0f6fa7;
+}
+
+.List p {
+  color: #ffffff;
+  text-align: center;
+}
+
+.List hr{
+  width:95%;
+  margin: auto;
+  margin-top:2%;
+  margin-bottom: 2%;
+  text-align:center;
+  height:1px;
+  border: none;
+  background-color: rgb(104, 104, 104);
+}
+
+/*Blog details component styles */
+
+.blog-details{
+  background: #000000;
+  position:absolute;
+  right:25%;
+  left:25%;
+  text-align:center;
+  padding-top: 5%;
+}
+
+.blog-details h1 {
+  color:#bbbbbb;
+  text-align: center;
+}
+
+.blog-details h2 {
+  color:#d68334;
+  text-align: center;
+}
+
+.blog-details h3 {
+  color:#0f6fa7;
+}
+
+.blog-details p {
+  color: #ffffff;
+  text-align: center;
+}
+
+.blog-details hr{
+  text-align:center;
+  height:1px;
+  border: none;
+  background-color: rgb(104, 104, 104);
+}
+
+.blog-details a{
+  color: #eca622;
+  text-decoration: none;
+}
+
+.blog-details a:hover{
+  color:#ce711b;
+}
+
+.blog-preview{
+  background-color: #0a0a0a;
+  border-radius: 5px;
+  padding-top: 2%;
+  text-align: left;
+  padding-left:2%;
+}
+
+.blog-preview h3{
+  color: #0f6fa7;
+}
+
+.blog-preview p{
+  text-align: left;
+}
+
+/*Download pdf */
+
+.download-pdf{
+  padding-top:5%;
+  padding-bottom:5%;
+}
+
+/*Fractal*/
+
+.Fractal .canvas_container{
+  background-color: rgb(0, 0, 0);
+  margin:auto;
+}
+
+.Fractal .canvas_container canvas{
+  background-color: rgb(0, 0, 0);
+  border-radius: 5px;
+  width: 85%;
+}
+
+@media (max-width: 475px) {
+  .Fractal .canvas_container canvas{
+    width: 95%;
+  }
+}
+
+/* For Latex React embedding */
+
+.Latex-Container{
+  color:white;
+}

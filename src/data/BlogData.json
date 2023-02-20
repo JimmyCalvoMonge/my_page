@@ -1,0 +1,23 @@
+[
+    {
+        "title":"Emil Artin's thesis and the genesis of the Weil conjectures",
+        "summary":"Exploration of Emil Artin's 1924 thesis as the origin of the famous Artin Conjectures. We offer a review of the historical work on the theory of algebraic function fields by E.Artin and F.K. Schmidt.",
+        "link": "https://drive.google.com/file/d/1BTw2cQy2FxmyxuSTwEZIkvoGA3m6TBjv/view?usp=sharing",
+        "id":1
+    },
+
+    {
+        "title":"Basic Classification Algorithms in Machine Learning (Mathematical Foundations)",
+        "summary":"After taking a first course on Machine Learning fundamentals, I decided to do a small compendium of the mathematical definitions behind the most famous classification algorithms in Supervised and Unsupervised Learning.",
+        "link": "https://drive.google.com/file/d/1wStyw8I6IlFJBJIV62rlTW4ARVoUvaws/view?usp=sharing",
+        "id":2
+    },
+
+    {
+        "title":"Extensions of Torsors and prime to p fundamental group scheme",
+        "summary":"This is my master's thesis for my Pure Mathematics Masters at the University of Costa Rica. Thesis is in Spanish.",
+        "link": "https://drive.google.com/file/d/1yIwCp7C9JKmhCJeYFgxhl08ae3bYSwqY/view?usp=sharing",
+        "id":3
+    }
+
+]

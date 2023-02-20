@@ -1,0 +1,36 @@
+[
+        {
+            "title":"Differential Equations for Engineering",
+            "summary":"My notes for the course of differential equations MA 1005 at the University of Costa Rica. They contain all the syllabus material and plenty of solved exercises. In Spanish.",
+            "color1":"#25477a",
+            "color2":"#172e4f",
+            "link":"https://drive.google.com/file/d/1FN7EZvGknlK-9K2nTtxTxckQ9kfybcEz/view?usp=sharing",
+            "id":1
+        },
+        {
+            "title":"Elementary Abstract Algebra",
+            "summary":"This document was made to serve as lecture notes for the course MA 0370 of Abstract Algebra for third year students of the career of Mathematical Education. There are plenty of applications and explorations in SageMath (a python-based environment for mathematical calculations)",
+            "color1":"#25477a",
+            "color2":"#172e4f",
+            "link":"https://drive.google.com/file/d/1aTCDHZMVHu-m5RkygQUHHX8uJaTlscRE/view?usp=sharing",
+            "id":2 
+        },
+
+        {
+            "title":"Calculus in One Variable (Honors)",
+            "summary":"These are lecture notes for an introductory real analysis (calculus) course (MA 0250) for students of the career of Pure Mathematics and Actuarial Science.",
+            "color1":"#25477a",
+            "color2":"#172e4f",
+            "link":"https://drive.google.com/file/d/180ZNb3CztHfKilYnlrvuQFNKr7s8mc24/view?usp=sharing",
+            "id":3 
+        },
+
+        {
+            "title":"Introduction to Number Theory",
+            "summary":"Content for the senior year course on Number Theory MA 0025. Theory is well fundamented, including applications to cryptography and many explorative exercises with SageMath (a python-based environment for mathematical calculations)",
+            "color1":"#25477a",
+            "color2":"#172e4f",
+            "link":"https://drive.google.com/file/d/19JAkoxM0TQ-ddV8te3Cj3EaVVqvObtkE/view?usp=sharing",
+            "id":4
+        }
+]

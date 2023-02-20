@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    z-index:1;
+    position:relative;
+}
+
+.canvas_container{
+    position: fixed;
+    z-index: 0;
+    background-color: black;
+    margin-top:1%;
+}
+
+.canvas_container h3{
+    background-color: rgb(0, 0, 0);
+    margin-top:10px;
+    z-index: 1;
+    margin:auto;
+}
