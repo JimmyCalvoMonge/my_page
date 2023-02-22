@@ -72,11 +72,7 @@ class Home extends React.Component {
 
 
             <div className="col-xl-8 col-lg-8 col-md-8 col-sm-6 col-xs-6 col-right">
-
-              <Link to="/blogs/spirals">
-                <Spirals index={this.state.index} spiral_name={this.state.spiral_name} />
-              </Link>
-
+              <Spirals index={this.state.index} spiral_name={this.state.spiral_name} />
             </div>
 
           </div>
