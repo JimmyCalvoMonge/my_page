@@ -55,10 +55,10 @@ class Home extends React.Component {
 
               <div className="class1">
 
-              <a href="/aboutme"><p>About me ... </p></a>
-              <a href="/notes"><p>Class Notes</p></a>
-              <a href="/blogs"><p>Blogs</p></a>
-              <a href="/funfractals"><p>Fun with fractals!</p></a>
+              <a href="/aboutme">About me ...</a> <br></br>
+              <a href="/notes">Class Notes</a> <br></br>
+              <a href="/blogs">Blogs</a> <br></br>
+              <a href="/funfractals">Fun with fractals!</a> <br></br>
 
               </div>
 

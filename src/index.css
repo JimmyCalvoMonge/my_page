@@ -143,6 +143,11 @@ body {
   margin-top: 10%;
   margin-bottom: 10%;
   text-align: right;
+  display: block;
+}
+
+.Home a{
+  color: white;
 }
 
 /* Aboutme styles */
