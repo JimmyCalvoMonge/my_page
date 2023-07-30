@@ -3,7 +3,7 @@ import React from "react";
 
 // Import download component and pdf with my cv
 import Download from './Download';
-import My_CV from '../documents/Jimmy_Calvo_CV_02_13_2022.pdf';
+import My_CV from '../documents/CV_Jimmy_Calvo_Monge.pdf';
 
 class Aboutme extends React.Component {
   

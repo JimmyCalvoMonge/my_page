@@ -1,23 +1,38 @@
 [
+
+    {
+        "title":"A nonlinear relapse model with disaggregated contact rates: analysis of a forward-backward bifurcation",
+        "summary":"We developed a nonlinear differential equation model to explore the dynamics of relapse phenomena. Our incidence rate function is formulated, taking inspiration from recent adaptive algorithms. It incorporates contact behavior for individuals in each health class. We use constant contact rates at each health status for our analytical results and prove conditions for different forward-backward bifurcation scenarios. The relationship between the different contact rates influences these conditions. Numerical examples show the sensitivity of the model toward initial conditions. In particular, we highlight the effect of temporarily recovered individuals and infected initial conditions.",
+        "link": "https://arxiv.org/pdf/2302.00161.pdf",
+        "id":1
+    },
+
+    {
+        "title":"On the embedding of Galois groups into wreath products",
+        "summary":"In this paper we make explicit an application of the wreath product construction to the Galois groups of field extensions.",
+        "link": "https://arxiv.org/pdf/2306.14386.pdf",
+        "id":2
+    },
+
     {
         "title":"Emil Artin's thesis and the genesis of the Weil conjectures",
         "summary":"Exploration of Emil Artin's 1924 thesis as the origin of the famous Artin Conjectures. We offer a review of the historical work on the theory of algebraic function fields by E.Artin and F.K. Schmidt.",
         "link": "https://drive.google.com/file/d/1BTw2cQy2FxmyxuSTwEZIkvoGA3m6TBjv/view?usp=sharing",
-        "id":1
+        "id":3
     },
 
     {
         "title":"Basic Classification Algorithms in Machine Learning (Mathematical Foundations)",
         "summary":"After taking a first course on Machine Learning fundamentals, I decided to do a small compendium of the mathematical definitions behind the most famous classification algorithms in Supervised and Unsupervised Learning.",
         "link": "https://drive.google.com/file/d/1wStyw8I6IlFJBJIV62rlTW4ARVoUvaws/view?usp=sharing",
-        "id":2
+        "id":4
     },
 
     {
         "title":"Extensions of Torsors and prime to p fundamental group scheme",
         "summary":"This is my master's thesis for my Pure Mathematics Masters at the University of Costa Rica. Thesis is in Spanish.",
         "link": "https://drive.google.com/file/d/1yIwCp7C9JKmhCJeYFgxhl08ae3bYSwqY/view?usp=sharing",
-        "id":3
+        "id":5
     }
 
 ]
