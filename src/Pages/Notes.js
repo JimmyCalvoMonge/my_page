@@ -1,4 +1,3 @@
-import useFetch from "../useFetch";
 import NotesList from './NotesList';
 
 const Notes = () => {

@@ -1,9 +1,5 @@
 import React from "react";
 
-// Import download component and pdf with fractals article.
-import Download from './Download';
-import Fractals_Article from '../documents/Jimmy_Calvo_CV_02_13_2022.pdf';
-
 // Import Fractals Widget Component
 import Fractal from './Fractal';
 

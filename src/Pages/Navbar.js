@@ -1,5 +1,4 @@
 /// Navbar components
-import {Link} from 'react-router-dom';
 import favicon from '../assets/favicon.png';
 
 const Navbar = () =>{
