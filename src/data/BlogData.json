@@ -3,7 +3,7 @@
     {
         "title":"A nonlinear relapse model with disaggregated contact rates: analysis of a forward-backward bifurcation",
         "summary":"We developed a nonlinear differential equation model to explore the dynamics of relapse phenomena. Our incidence rate function is formulated, taking inspiration from recent adaptive algorithms. It incorporates contact behavior for individuals in each health class. We use constant contact rates at each health status for our analytical results and prove conditions for different forward-backward bifurcation scenarios. The relationship between the different contact rates influences these conditions. Numerical examples show the sensitivity of the model toward initial conditions. In particular, we highlight the effect of temporarily recovered individuals and infected initial conditions.",
-        "link": "https://arxiv.org/pdf/2302.00161.pdf",
+        "link": "https://www.sciencedirect.com/science/article/pii/S2468042723000581?ssrnid=4398199&dgcid=SSRN_redirect_SD",
         "id":1
     },
 
@@ -31,7 +31,7 @@
     {
         "title":"Extensions of Torsors and prime to p fundamental group scheme",
         "summary":"This is my master's thesis for my Pure Mathematics Masters at the University of Costa Rica. Thesis is in Spanish.",
-        "link": "https://drive.google.com/file/d/1yIwCp7C9JKmhCJeYFgxhl08ae3bYSwqY/view?usp=sharing",
+        "link": "https://aif.centre-mersenne.org/item/10.5802/aif.3475.pdf",
         "id":5
     }
 
