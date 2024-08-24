@@ -12,7 +12,7 @@ const BlogList = ({blogs,title,description}) =>{
             <p>{blog.summary}</p>
             <br></br>
             <a href={`${blog.link}`} target={'_blank'}> Read this blog </a>
-            <p style={{'text-align': 'left'}}> Date: {blog.date}</p>
+            <p style={{'text-align': 'right'}}> Date: {blog.date}</p>
             <hr></hr>
             </div>
         ))}
