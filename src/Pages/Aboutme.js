@@ -16,16 +16,19 @@ class Aboutme extends React.Component {
         <img src={profilepic}></img>
 
         <hr></hr>
-        <p>My name is Jimmy Calvo Monge. I studied pure mathematics at the University of Costa Rica (UCR),
+        <p>My name is Jimmy Calvo-Monge. I studied pure mathematics at the University of Costa Rica (UCR),
         ending with a masters degree in Algebraic Geometry. There I was a full time professor for three years.
-        Now I'm working as a statistician and data scientist at Intel. I'm studying a 
+        Now I'm working as a statistician and data scientist at Intel. I obtained a
         <a href="http://www.posgradomatematica.ucr.ac.cr/index.php/oferta-academica/maestria-profesional-en-metodos-matematicos-y-aplicaciones"> Masters degree in applied mathematical methods</a>,
-        at UCR and another master program in Full Stack Web Development at <a href="https://www.threepoints.com/es/">Three Points Business School</a>.        
+        at UCR and another master program in Full Stack Web Development at 
+        <a href="https://www.threepoints.com/es/">Three Points Business School</a>.        
         </p>
 
         <p>
-        During this time I wrote several math material as class notes, blogs, and books. So, I decided to create 
+        Since I graduated from Maths I wrote several math material as class notes, blogs, and books. So, I decided to create 
         this webpage to upload all this information for students, teachers or anyone interested!
+        I have worked as a Data Scientist for Intel and now I work as a Data Engineer for Hakkoda.
+        I dream about continue my learning and professional journey and move on to new exciting places!
         </p>
 
         <p>

@@ -1,7 +1,8 @@
-const BlogList = ({blogs,title}) =>{
+const BlogList = ({blogs,title,description}) =>{
     return (
         <div className="blog-list">
         <h1>{title}</h1>
+        <p>{description}</p>
         <br></br>
         <hr></hr>
         <br></br>
