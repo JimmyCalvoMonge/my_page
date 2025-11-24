@@ -7,10 +7,10 @@ class Home extends React.Component {
   
     constructor(props) {
       super(props);
-      this.state = { index :-1, 
-      spiral_name: 'Sacks', 
-      reference:"canvas", 
-      spirals:["Sacks","Ulam"],
+      this.state = { index :-1,
+      spiral_name: 'Sacks',
+      reference:"canvas",
+      spirals:["Sacks","Ulam","Fourier","Lissajous","Lorenz","Mandelbrot","Barnsley"],
       };
       this.textInput = React.createRef();
       this.tick = this.tick.bind(this);
@@ -63,7 +63,7 @@ class Home extends React.Component {
 
               <div className="class1">
                 <button onClick={this.setSpiralName} type="button" className="btn btn-dark">
-                Change the spiral
+                Change the animation
                 </button>
               </div>  
 

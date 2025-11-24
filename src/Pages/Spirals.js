@@ -20,6 +20,20 @@ class Spirals extends React.Component {
       return num > 1;
     }
 
+    //Get description for each animation
+    getAnimationDescription(name) {
+      const descriptions = {
+        'Sacks': 'Sacks Spiral - Prime numbers highlighted in a spiral pattern based on square roots',
+        'Ulam': 'Ulam Spiral - Prime numbers arranged in a square spiral starting from the center',
+        'Fourier': 'Fourier Series - Complex curves drawn by rotating circles (epicycles)',
+        'Lissajous': 'Lissajous Curves - Parametric curves showing harmonic oscillation relationships',
+        'Lorenz': 'Lorenz Attractor - The famous butterfly effect from chaos theory',
+        'Mandelbrot': 'Mandelbrot Set - Zooming into the famous fractal boundary',
+        'Barnsley': 'Barnsley Fern - A fractal created using iterated function systems'
+      };
+      return descriptions[name] || 'Mathematical Animation';
+    }
+
     //Función para dibujar una espiral de Sacks.
     draw_sacks_spiral(width,height,context,intercept,color,index,index_start,mult,defase,orientation){
 
@@ -182,11 +196,279 @@ class Spirals extends React.Component {
           context.stroke();
           context.save();
         }
+
+        // Dibujar Fourier Series (Epicycles) //
+        if(spiral_name==="Fourier"){
+          const t = index * 0.01;
+          const centerX = width * 0.5;
+          const centerY = height * 0.5;
+
+          // Define circles with different frequencies and amplitudes
+          const circles = [
+            { radius: 100, freq: 1, phase: 0 },
+            { radius: 50, freq: 3, phase: Math.PI/4 },
+            { radius: 30, freq: 5, phase: Math.PI/2 },
+            { radius: 20, freq: 7, phase: Math.PI }
+          ];
+
+          let x = centerX;
+          let y = centerY;
+
+          // Draw the circles
+          circles.forEach((circle, i) => {
+            const prevX = x;
+            const prevY = y;
+
+            const angle = circle.freq * t + circle.phase;
+            x += circle.radius * Math.cos(angle);
+            y += circle.radius * Math.sin(angle);
+
+            // Draw circle
+            context.beginPath();
+            context.arc(prevX, prevY, circle.radius, 0, 2 * Math.PI);
+            context.strokeStyle = `rgba(${100 + i * 40}, ${150 - i * 20}, 255, 0.3)`;
+            context.lineWidth = 1;
+            context.stroke();
+
+            // Draw line to next point
+            context.beginPath();
+            context.moveTo(prevX, prevY);
+            context.lineTo(x, y);
+            context.strokeStyle = '#FF6B6B';
+            context.lineWidth = 2;
+            context.stroke();
+          });
+
+          // Draw the final point
+          context.beginPath();
+          context.arc(x, y, 4, 0, 2 * Math.PI);
+          context.fillStyle = '#FF6B6B';
+          context.fill();
+
+          // Store and draw the path
+          if (!this.fourierPath) this.fourierPath = [];
+          this.fourierPath.push({ x, y });
+
+          if (this.fourierPath.length > 500) this.fourierPath.shift();
+
+          context.beginPath();
+          this.fourierPath.forEach((point, i) => {
+            if (i === 0) context.moveTo(point.x, point.y);
+            else context.lineTo(point.x, point.y);
+          });
+          context.strokeStyle = '#4ECDC4';
+          context.lineWidth = 2;
+          context.stroke();
+
+          if (index === -1) this.fourierPath = [];
+        }
+
+        // Dibujar Lissajous Curves //
+        if(spiral_name==="Lissajous"){
+          const t = index * 0.02;
+          const centerX = width * 0.5;
+          const centerY = height * 0.5;
+
+          // Lissajous parameters
+          const A = 150;
+          const B = 150;
+          const a = 3;
+          const b = 4;
+          const delta = Math.PI / 2;
+
+          const x = centerX + A * Math.sin(a * t + delta);
+          const y = centerY + B * Math.sin(b * t);
+
+          // Store and draw the path
+          if (!this.lissajousPath) this.lissajousPath = [];
+          this.lissajousPath.push({ x, y });
+
+          if (this.lissajousPath.length > 1000) this.lissajousPath.shift();
+
+          // Draw the curve with gradient color
+          this.lissajousPath.forEach((point, i) => {
+            if (i > 0) {
+              const prevPoint = this.lissajousPath[i - 1];
+              const hue = (i / this.lissajousPath.length) * 360;
+              context.beginPath();
+              context.moveTo(prevPoint.x, prevPoint.y);
+              context.lineTo(point.x, point.y);
+              context.strokeStyle = `hsl(${hue}, 70%, 60%)`;
+              context.lineWidth = 2;
+              context.stroke();
+            }
+          });
+
+          // Draw current point
+          context.beginPath();
+          context.arc(x, y, 5, 0, 2 * Math.PI);
+          context.fillStyle = '#FF6B6B';
+          context.fill();
+
+          if (index === -1) this.lissajousPath = [];
+        }
+
+        // Dibujar Lorenz Attractor //
+        if(spiral_name==="Lorenz"){
+          // Initialize Lorenz system state
+          if (!this.lorenzState || index === -1) {
+            this.lorenzState = { x: 0.1, y: 0, z: 0 };
+            this.lorenzPath = [];
+          }
+
+          // Lorenz parameters
+          const sigma = 10;
+          const rho = 28;
+          const beta = 8/3;
+          const dt = 0.005;
+
+          // Calculate derivatives
+          const dx = sigma * (this.lorenzState.y - this.lorenzState.x) * dt;
+          const dy = (this.lorenzState.x * (rho - this.lorenzState.z) - this.lorenzState.y) * dt;
+          const dz = (this.lorenzState.x * this.lorenzState.y - beta * this.lorenzState.z) * dt;
+
+          // Update state
+          this.lorenzState.x += dx;
+          this.lorenzState.y += dy;
+          this.lorenzState.z += dz;
+
+          // Project 3D to 2D
+          const scale = 8;
+          const centerX = width * 0.5;
+          const centerY = height * 0.5;
+          const x = centerX + this.lorenzState.x * scale;
+          const y = centerY + this.lorenzState.z * scale - 200;
+
+          // Store path
+          this.lorenzPath.push({ x, y, z: this.lorenzState.z });
+
+          if (this.lorenzPath.length > 3000) this.lorenzPath.shift();
+
+          // Draw the attractor with color based on z-coordinate
+          this.lorenzPath.forEach((point, i) => {
+            if (i > 0) {
+              const prevPoint = this.lorenzPath[i - 1];
+              const hue = ((point.z + 30) / 60) * 240; // Blue to red based on height
+              context.beginPath();
+              context.moveTo(prevPoint.x, prevPoint.y);
+              context.lineTo(point.x, point.y);
+              context.strokeStyle = `hsl(${hue}, 80%, 60%)`;
+              context.lineWidth = 1;
+              context.stroke();
+            }
+          });
+        }
+
+        // Dibujar Mandelbrot Set //
+        if(spiral_name==="Mandelbrot"){
+          if (index === -1 || index % 50 === 0) {
+            // Redraw every 50 frames for zoom effect
+            const zoom = 1 + index * 0.003;
+            const centerX_frac = -0.5;
+            const centerY_frac = 0;
+            const maxIter = 50;
+
+            const pixelSize = 2; // Draw every 2 pixels for performance
+
+            for (let px = 0; px < width; px += pixelSize) {
+              for (let py = 0; py < height; py += pixelSize) {
+                // Map pixel to complex plane
+                const x0 = ((px - width/2) / (width/4)) / zoom + centerX_frac;
+                const y0 = ((py - height/2) / (height/4)) / zoom + centerY_frac;
+
+                let x = 0;
+                let y = 0;
+                let iteration = 0;
+
+                // Mandelbrot iteration
+                while (x*x + y*y <= 4 && iteration < maxIter) {
+                  const xTemp = x*x - y*y + x0;
+                  y = 2*x*y + y0;
+                  x = xTemp;
+                  iteration++;
+                }
+
+                // Color based on iteration count
+                if (iteration === maxIter) {
+                  context.fillStyle = '#000000';
+                } else {
+                  const hue = (iteration / maxIter) * 360;
+                  context.fillStyle = `hsl(${hue}, 100%, 50%)`;
+                }
+
+                context.fillRect(px, py, pixelSize, pixelSize);
+              }
+            }
+          }
+        }
+
+        // Dibujar Barnsley Fern //
+        if(spiral_name==="Barnsley"){
+          // Initialize fern state
+          if (!this.fernState || index === -1) {
+            this.fernState = { x: 0, y: 0 };
+            this.fernPoints = [];
+          }
+
+          // Draw multiple points per frame for faster generation
+          for (let i = 0; i < 10; i++) {
+            const rand = Math.random();
+            let nextX, nextY;
+
+            // Apply one of four transformations based on probability
+            if (rand < 0.01) {
+              // Stem (1% probability)
+              nextX = 0;
+              nextY = 0.16 * this.fernState.y;
+            } else if (rand < 0.86) {
+              // Successively smaller leaflets (85% probability)
+              nextX = 0.85 * this.fernState.x + 0.04 * this.fernState.y;
+              nextY = -0.04 * this.fernState.x + 0.85 * this.fernState.y + 1.6;
+            } else if (rand < 0.93) {
+              // Largest left-hand leaflet (7% probability)
+              nextX = 0.2 * this.fernState.x - 0.26 * this.fernState.y;
+              nextY = 0.23 * this.fernState.x + 0.22 * this.fernState.y + 1.6;
+            } else {
+              // Largest right-hand leaflet (7% probability)
+              nextX = -0.15 * this.fernState.x + 0.28 * this.fernState.y;
+              nextY = 0.26 * this.fernState.x + 0.24 * this.fernState.y + 0.44;
+            }
+
+            this.fernState.x = nextX;
+            this.fernState.y = nextY;
+
+            // Store the point
+            this.fernPoints.push({ x: nextX, y: nextY });
+          }
+
+          // Keep only recent points
+          if (this.fernPoints.length > 10000) {
+            this.fernPoints = this.fernPoints.slice(-10000);
+          }
+
+          // Draw all points
+          const scale = 60;
+          const centerX = width * 0.5;
+          const centerY = height * 0.85;
+
+          this.fernPoints.forEach((point, i) => {
+            const px = centerX + point.x * scale;
+            const py = centerY - point.y * scale;
+
+            // Color gradient based on age of point
+            const alpha = Math.min(1, (i / this.fernPoints.length) + 0.3);
+            const hue = 120; // Green color for fern
+
+            context.fillStyle = `hsla(${hue}, 70%, 40%, ${alpha})`;
+            context.fillRect(px, py, 2, 2);
+          });
+        }
       };
     }
     
     render() {
 
+      const { spiral_name } = this.props;
       let size = 750;
       let scale = window.devicePixelRatio;
       let ww = window.innerWidth;
@@ -196,6 +478,9 @@ class Spirals extends React.Component {
 
       return (
         <div>
+        <div style={{ textAlign: 'center', marginBottom: '10px' }}>
+          <em>{this.getAnimationDescription(spiral_name)}</em>
+        </div>
         <div className="canvas_container">
         <canvas
           ref={this.canvasRef}
