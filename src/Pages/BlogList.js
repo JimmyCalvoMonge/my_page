@@ -6,16 +6,23 @@ const BlogList = ({blogs,title,description}) =>{
         <br></br>
         <hr></hr>
         <br></br>
+        <div className="blog-grid">
         {blogs.map((blog)=>(
-            <div className="blog-preview" key={blog.id}>
-            <h3>{blog.title}</h3>
-            <p>{blog.summary}</p>
-            <br></br>
-            <a href={`${blog.link}`} target={'_blank'}> Read this blog </a>
-            <p style={{'text-align': 'right'}}> Date: {blog.date}</p>
-            <hr></hr>
+            <div className="blog-card" key={blog.id}>
+            <div className="blog-image-container">
+                <img src={blog.image} alt={blog.title} className="blog-image" />
+            </div>
+            <div className="blog-content">
+                <h3 className="blog-title">{blog.title}</h3>
+                <p className="blog-date">Date: {blog.date}</p>
+                <p className="blog-summary">{blog.summary}</p>
+                <a href={`${blog.link}`} target={'_blank'} rel="noreferrer" className="blog-link">
+                    Read More →
+                </a>
+            </div>
             </div>
         ))}
+        </div>
         </div>
     )
 }

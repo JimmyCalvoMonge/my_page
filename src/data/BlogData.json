@@ -5,30 +5,34 @@
         "summary":"In this paper we make explicit an application of the wreath product construction to the Galois groups of field extensions.",
         "link": "https://www.tandfonline.com/doi/full/10.1080/00927872.2024.2389956",
         "date": "2024-08-01",
+        "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=300&fit=crop",
         "id":1
     },
 
     {
         "title":"A nonlinear relapse model with disaggregated contact rates: analysis of a forward-backward bifurcation",
-        "summary":"We developed a nonlinear differential equation model to explore the dynamics of relapse phenomena. Our incidence rate function is formulated, taking inspiration from recent adaptive algorithms. It incorporates contact behavior for individuals in each health class. We use constant contact rates at each health status for our analytical results and prove conditions for different forward-backward bifurcation scenarios. The relationship between the different contact rates influences these conditions. Numerical examples show the sensitivity of the model toward initial conditions. In particular, we highlight the effect of temporarily recovered individuals and infected initial conditions.",
+        "summary":"We developed a nonlinear differential equation model to explore the dynamics of relapse phenomena. Our incidence rate function is formulated, taking inspiration from recent adaptive algorithms.",
         "link": "https://www.sciencedirect.com/science/article/pii/S2468042723000581?ssrnid=4398199&dgcid=SSRN_redirect_SD",
         "date": "2023-09-01",
+        "image": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=400&h=300&fit=crop",
         "id":2
     },
 
     {
         "title":"Source-Sink Dynamics in a Two-Patch SI Epidemic Model with Life Stages and No Recovery from Infection",
-        "summary":"This study presents a comprehensive analysis of a two-patch, two-life stage SI model without recovery from infection, focusing on the dynamics of disease spread and host population viability in natural populations. The model, inspired by real-world ecological crises like the decline of amphibian populations due to chytridiomycosis and sea star populations due to Sea Star Wasting Disease, aims to understand the conditions under which a sink host population can present ecological rescue from a healthier, source population. Mathematical and numerical analyses reveal the critical roles of the basic reproductive numbers of the source and sink populations, the maturation rate, and the dispersal rate of juveniles in determining population outcomes. der which its population. These findings provide insights into managing natural populations affected by disease, with implications for conservation strategies, such as the importance of maintaining reproductively viable refuge populations and considering the effects of dispersal and maturation rates on population recovery. The research underscores the complexity of host-pathogen dynamics in spatially structured environments and highlights the need for multi-faceted approaches to biodiversity conservation in the face of emerging diseases.",
+        "summary":"This study presents a comprehensive analysis of a two-patch, two-life stage SI model without recovery from infection, focusing on the dynamics of disease spread and host population viability in natural populations.",
         "link": "https://pubmed.ncbi.nlm.nih.gov/38976154/",
         "date": "2024-07-08",
+        "image": "https://th.bing.com/th/id/R.b4f8f6465aa7648280af1fd44abd0ded?rik=CuI04oo3CKVYHA&pid=ImgRaw&r=0",
         "id":3
     },
 
     {
         "title":"Interplay between Foraging Choices and Population Growth Dynamics",
-        "summary":"In this study, we couple a population dynamics model with a model for optimal foraging to study the interdependence between individual-level cost-benefits and population-scale dynamics. Specifically, we study the logistic growth model, which provides insights into population dynamics under resource limitations. Unlike exponential growth, the logistic model incorporates the concept of carrying capacity, thus offering a more realistic depiction of biological populations as they near environmental limits. We aim to study the impact of individual-level incentives driving behavioral responses in a dynamic environment. Specifically, explore the coupled dynamics between population density and individuals' foraging times. Our results yield insights into the effects of population size on individuals' optimal foraging efforts, which impacts the population's size.",
+        "summary":"In this study, we couple a population dynamics model with a model for optimal foraging to study the interdependence between individual-level cost-benefits and population-scale dynamics.",
         "link": "https://arxiv.org/abs/2408.02552",
         "date": "2024-08-05",
+        "image": "https://media.licdn.com/dms/image/D4D12AQELqh6lUSwInA/article-cover_image-shrink_600_2000/0/1697170573129?e=2147483647&v=beta&t=c1ZLKYt9hB8AsOTCpqQ4a4ua4Iw5UOEqSAqLLvps5UU",
         "id":4
     },
 
@@ -38,6 +42,7 @@
         "summary":"Exploration of Emil Artin's 1924 thesis as the origin of the famous Artin Conjectures. We offer a review of the historical work on the theory of algebraic function fields by E.Artin and F.K. Schmidt.",
         "link": "https://drive.google.com/file/d/1BTw2cQy2FxmyxuSTwEZIkvoGA3m6TBjv/view?usp=sharing",
         "date": "2021-01-01",
+        "image": "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=400&h=300&fit=crop",
         "id":5
     },
 
@@ -46,6 +51,7 @@
         "summary":"After taking a first course on Machine Learning fundamentals, I decided to do a small compendium of the mathematical definitions behind the most famous classification algorithms in Supervised and Unsupervised Learning.",
         "link": "https://drive.google.com/file/d/1wStyw8I6IlFJBJIV62rlTW4ARVoUvaws/view?usp=sharing",
         "date": "2021-01-01",
+        "image": "https://tse2.mm.bing.net/th/id/OIP.vdxsl9cIVPtEZmGwXcLJ7gHaD_?rs=1&pid=ImgDetMain&o=7&rm=3",
         "id":6
     },
 
@@ -54,6 +60,7 @@
         "summary":"This is my master's thesis for my Pure Mathematics Masters at the University of Costa Rica. Thesis is in Spanish.",
         "link": "https://aif.centre-mersenne.org/item/10.5802/aif.3475.pdf",
         "date": "2022-07-01",
+        "image": "https://th.bing.com/th/id/R.e5718dc9450382d9ceb200ef2c6e21fb?rik=VlDuKVnSxcMZew&riu=http%3a%2f%2faleph.se%2fandart2%2fwp-content%2fuploads%2f2017%2f03%2fcalabiyauN-1200x1200.png&ehk=bpkeBov4TTSHlTYTXRHXCn6PNvoe%2fWrs6NctMsHuohA%3d&risl=&pid=ImgRaw&r=0",
         "id":7
     }
 
