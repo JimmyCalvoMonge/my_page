@@ -10,7 +10,7 @@ class Home extends React.Component {
       this.state = { index :-1,
       spiral_name: 'Sacks',
       reference:"canvas",
-      spirals:["Sacks","Ulam","Fourier","Lissajous","Lorenz","Mandelbrot","Barnsley"],
+      spirals:["Sacks","Ulam","Fourier","Lissajous","Lorenz","Mandelbrot","Barnsley","Koch","Cantor"],
       };
       this.textInput = React.createRef();
       this.tick = this.tick.bind(this);
@@ -21,6 +21,10 @@ class Home extends React.Component {
       const this_index = this.state.spirals.indexOf(this.state.spiral_name);
       const new_index = (this_index+1)%number_spirals;
       this.setState({spiral_name:this.state.spirals[new_index]});
+      this.setState({index:-1});
+    }
+
+    resetAnimation = () => {
       this.setState({index:-1});
     }
   
@@ -57,13 +61,15 @@ class Home extends React.Component {
               <a href="/aboutme">About me ...</a> <br></br>
               <a href="/notes">Class Notes</a> <br></br>
               <a href="/blogs">Blogs</a> <br></br>
-              <a href="/funfractals">Fun with fractals!</a> <br></br>
 
               </div>
 
               <div className="class1">
                 <button onClick={this.setSpiralName} type="button" className="btn btn-dark">
                 Change the animation
+                </button>
+                <button onClick={this.resetAnimation} type="button" className="btn btn-dark">
+                Reset animation
                 </button>
               </div>  
 

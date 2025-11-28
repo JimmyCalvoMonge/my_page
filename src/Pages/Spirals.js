@@ -29,7 +29,9 @@ class Spirals extends React.Component {
         'Lissajous': 'Lissajous Curves - Parametric curves showing harmonic oscillation relationships',
         'Lorenz': 'Lorenz Attractor - The famous butterfly effect from chaos theory',
         'Mandelbrot': 'Mandelbrot Set - Zooming into the famous fractal boundary',
-        'Barnsley': 'Barnsley Fern - A fractal created using iterated function systems'
+        'Barnsley': 'Barnsley Fern - A fractal created using iterated function systems',
+        'Koch': 'Koch Snowflake - A fractal curve built by iteratively adding triangular bumps',
+        'Cantor': "Cantor Function (Devil's Staircase) - A continuous but fractal monotonic function"
       };
       return descriptions[name] || 'Mathematical Animation';
     }
@@ -462,6 +464,183 @@ class Spirals extends React.Component {
             context.fillStyle = `hsla(${hue}, 70%, 40%, ${alpha})`;
             context.fillRect(px, py, 2, 2);
           });
+        }
+
+        // Dibujar Koch Snowflake //
+        if(spiral_name==="Koch"){
+          // Function to generate Koch curve from a line segment
+          const kochSegment = (p1, p2) => {
+            const dx = p2.x - p1.x;
+            const dy = p2.y - p1.y;
+
+            // Divide the line into 3 equal parts
+            const p3 = { x: p1.x + dx/3, y: p1.y + dy/3 };
+            const p5 = { x: p1.x + 2*dx/3, y: p1.y + 2*dy/3 };
+
+            // Create the peak of the triangle (pointing OUTWARD)
+            const angle = Math.atan2(dy, dx) + Math.PI/3;
+            const length = Math.sqrt(dx*dx + dy*dy) / 3;
+            const p4 = {
+              x: p3.x + length * Math.cos(angle),
+              y: p3.y + length * Math.sin(angle)
+            };
+
+            return [p1, p3, p4, p5, p2];
+          };
+
+          // Apply Koch transformation to all segments (including closing segment)
+          const applyKoch = (points) => {
+            const newPoints = [];
+            for (let i = 0; i < points.length; i++) {
+              const nextIndex = (i + 1) % points.length;
+              const segment = kochSegment(points[i], points[nextIndex]);
+              newPoints.push(...segment.slice(0, -1));
+            }
+            return newPoints;
+          };
+
+          // Draw the snowflake
+          const drawSnowflake = (points, color, lineWidth) => {
+            context.beginPath();
+            context.moveTo(points[0].x, points[0].y);
+            for (let i = 1; i < points.length; i++) {
+              context.lineTo(points[i].x, points[i].y);
+            }
+            context.closePath();
+            context.strokeStyle = color;
+            context.lineWidth = lineWidth;
+            context.stroke();
+          };
+
+          // Initialize with equilateral triangle (MUCH LARGER)
+          if (!this.kochPoints || index === -1) {
+            const size = 350;
+            const centerX = width * 0.5;
+            const centerY = height * 0.5;
+
+            this.kochPoints = [
+              { x: centerX, y: centerY - size * Math.sqrt(3)/3 },
+              { x: centerX - size/2, y: centerY + size * Math.sqrt(3)/6 },
+              { x: centerX + size/2, y: centerY + size * Math.sqrt(3)/6 }
+            ];
+            this.kochIteration = 0;
+          }
+
+          // Progress through iterations based on index
+          const iterationSpeed = 150; // Frames per iteration
+          const targetIteration = Math.min(5, Math.floor(index / iterationSpeed));
+
+          if (targetIteration > this.kochIteration) {
+            this.kochPoints = applyKoch(this.kochPoints);
+            this.kochIteration = targetIteration;
+          }
+
+          // Draw with color gradient based on iteration
+          const hue = (this.kochIteration / 5) * 240; // Blue to purple
+          const color = `hsl(${180 + hue}, 70%, 50%)`;
+          drawSnowflake(this.kochPoints, color, 2);
+        }
+
+        // Dibujar Cantor Function (Devil's Staircase) //
+        if(spiral_name==="Cantor"){
+          // Initialize Cantor function segments
+          if (!this.cantorSegments || index === -1) {
+            // Start with a single diagonal line from (0,0) to (1,1)
+            this.cantorSegments = [
+              { x1: 0, y1: 0, x2: 1, y2: 1 }
+            ];
+            this.cantorIteration = 0;
+          }
+
+          // Function to apply Cantor transformation to a segment
+          const cantorTransform = (segments) => {
+            const newSegments = [];
+            segments.forEach(seg => {
+              const dx = seg.x2 - seg.x1;
+              const dy = seg.y2 - seg.y1;
+
+              // First third: rising segment
+              newSegments.push({
+                x1: seg.x1,
+                y1: seg.y1,
+                x2: seg.x1 + dx/3,
+                y2: seg.y1 + dy/2
+              });
+
+              // Middle third: horizontal plateau
+              newSegments.push({
+                x1: seg.x1 + dx/3,
+                y1: seg.y1 + dy/2,
+                x2: seg.x1 + 2*dx/3,
+                y2: seg.y1 + dy/2
+              });
+
+              // Last third: rising segment
+              newSegments.push({
+                x1: seg.x1 + 2*dx/3,
+                y1: seg.y1 + dy/2,
+                x2: seg.x2,
+                y2: seg.y2
+              });
+            });
+            return newSegments;
+          };
+
+          // Draw the Cantor function
+          const drawCantorFunction = (segments, color, lineWidth) => {
+            context.beginPath();
+            context.strokeStyle = color;
+            context.lineWidth = lineWidth;
+
+            segments.forEach((seg, i) => {
+              if (i === 0) {
+                context.moveTo(seg.x1, seg.y1);
+              }
+              context.lineTo(seg.x2, seg.y2);
+            });
+
+            context.stroke();
+          };
+
+          // Progress through iterations
+          const iterationSpeed = 180;
+          const targetIteration = Math.min(7, Math.floor(index / iterationSpeed));
+
+          if (targetIteration > this.cantorIteration) {
+            // Clear the canvas before drawing the next iteration
+            context.clearRect(0, 0, width, height);
+            this.cantorSegments = cantorTransform(this.cantorSegments);
+            this.cantorIteration = targetIteration;
+          }
+
+          // Scale and position the function
+          const margin = 80;
+          const scale = Math.min(width - 2*margin, height - 2*margin);
+          const offsetX = (width - scale) / 2;
+          const offsetY = (height - scale) / 2;
+
+          // Transform segments to canvas coordinates
+          const canvasSegments = this.cantorSegments.map(seg => ({
+            x1: offsetX + seg.x1 * scale,
+            y1: offsetY + scale - seg.y1 * scale, // Flip y-axis
+            x2: offsetX + seg.x2 * scale,
+            y2: offsetY + scale - seg.y2 * scale
+          }));
+
+          // Draw axes
+          context.strokeStyle = '#666666';
+          context.lineWidth = 1;
+          context.beginPath();
+          context.moveTo(offsetX, offsetY + scale);
+          context.lineTo(offsetX + scale, offsetY + scale);
+          context.moveTo(offsetX, offsetY + scale);
+          context.lineTo(offsetX, offsetY);
+          context.stroke();
+
+          // Draw the function with color gradient
+          const hue = (this.cantorIteration / 7) * 180;
+          const color = `hsl(${hue + 180}, 80%, 55%)`;
+          drawCantorFunction(canvasSegments, color, 3);
         }
       };
     }
