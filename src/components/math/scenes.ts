@@ -1,3 +1,5 @@
+import type { L10n } from '../../i18n/locale.tsx'
+
 /**
  * Mathematical scenes drawn behind the hero portrait.
  *
@@ -5,6 +7,9 @@
  * radius `R` around the centre (the canvas is masked to a soft circle). Each
  * one builds itself up over its first few seconds and then keeps moving.
  */
+
+/** The same text in every language (formulas, mostly). */
+const both = (text: string): L10n => ({ en: text, es: text })
 
 export type Palette = {
   blue: string
@@ -22,11 +27,11 @@ export type Frame = {
 
 export type Scene = {
   id: string
-  name: string
+  name: L10n
   /** Short LaTeX formula shown under the name. */
-  formula: string
+  formula: L10n
   /** Plain-language explanation; inline LaTeX goes between $...$. */
-  explanation: string
+  explanation: L10n
   /** Time (ms) by which the scene is fully built; used for a still frame. */
   settle: number
   /** Precompute anything size-dependent and return the per-frame drawer. */
@@ -79,9 +84,12 @@ function dots(
 
 const lissajous: Scene = {
   id: 'lissajous',
-  name: 'Lissajous curve',
-  formula: String.raw`x = \sin(5t + \delta),\ y = \sin(4t)`,
-  explanation: String.raw`A Lissajous curve is the path of a point that oscillates in two perpendicular directions at once: $x(t) = \sin(at + \delta)$ and $y(t) = \sin(bt)$. Here $a = 5$ and $b = 4$. Because $a/b$ is rational, the curve closes up after one period. Its shape depends only on the ratio $a : b$ and the phase shift $\delta$. In the animation $\delta$ drifts slowly, so the figure seems to turn in three dimensions. Nathaniel Bowditch studied these curves in 1815 and Jules Antoine Lissajous in 1857; they appear on an oscilloscope when two signals are compared.`,
+  name: { en: 'Lissajous curve', es: 'Curva de Lissajous' },
+  formula: both(String.raw`x = \sin(5t + \delta),\ y = \sin(4t)`),
+  explanation: {
+    en: String.raw`A Lissajous curve is the path of a point that oscillates in two perpendicular directions at once: $x(t) = \sin(at + \delta)$ and $y(t) = \sin(bt)$. Here $a = 5$ and $b = 4$. Because $a/b$ is rational, the curve closes up after one period. Its shape depends only on the ratio $a : b$ and the phase shift $\delta$. In the animation $\delta$ drifts slowly, so the figure seems to turn in three dimensions. Nathaniel Bowditch studied these curves in 1815 and Jules Antoine Lissajous in 1857; they appear on an oscilloscope when two signals are compared.`,
+    es: String.raw`Una curva de Lissajous es la trayectoria de un punto que oscila en dos direcciones perpendiculares a la vez: $x(t) = \sin(at + \delta)$ y $y(t) = \sin(bt)$. Aquí $a = 5$ y $b = 4$. Como $a/b$ es racional, la curva se cierra después de un periodo. Su forma depende solo de la razón $a : b$ y del desfase $\delta$. En la animación, $\delta$ varía lentamente, por lo que la figura parece girar en tres dimensiones. Nathaniel Bowditch estudió estas curvas en 1815 y Jules Antoine Lissajous en 1857; aparecen en un osciloscopio al comparar dos señales.`,
+  },
   settle: 2500,
   create(size) {
     const c = size / 2
@@ -131,9 +139,12 @@ const lissajous: Scene = {
 
 const sacks: Scene = {
   id: 'sacks',
-  name: 'Sacks spiral',
-  formula: String.raw`r = \sqrt{n},\ \theta = 2\pi\sqrt{n}`,
-  explanation: String.raw`Each positive integer $n$ is placed at polar coordinates $(r, \theta) = (\sqrt{n},\, 2\pi\sqrt{n})$. A perfect square $n = k^2$ lands at angle $2\pi k$, so all the squares line up on a single ray and each full turn holds two more integers than the one before. The primes (blue) gather along curves: these are values of quadratic polynomials $n^2 + bn + c$, such as Euler’s prime-rich $n^2 + n + 41$. Twin primes, pairs $p$ and $p + 2$ that are both prime, are shown in yellow. Robert Sacks introduced the spiral in 1994.`,
+  name: { en: 'Sacks spiral', es: 'Espiral de Sacks' },
+  formula: both(String.raw`r = \sqrt{n},\ \theta = 2\pi\sqrt{n}`),
+  explanation: {
+    en: String.raw`Each positive integer $n$ is placed at polar coordinates $(r, \theta) = (\sqrt{n},\, 2\pi\sqrt{n})$. A perfect square $n = k^2$ lands at angle $2\pi k$, so all the squares line up on a single ray and each full turn holds two more integers than the one before. The primes (blue) gather along curves: these are values of quadratic polynomials $n^2 + bn + c$, such as Euler’s prime-rich $n^2 + n + 41$. Twin primes, pairs $p$ and $p + 2$ that are both prime, are shown in yellow. Robert Sacks introduced the spiral in 1994.`,
+    es: String.raw`Cada entero positivo $n$ se coloca en las coordenadas polares $(r, \theta) = (\sqrt{n},\, 2\pi\sqrt{n})$. Un cuadrado perfecto $n = k^2$ cae en el ángulo $2\pi k$, así que todos los cuadrados se alinean sobre un mismo rayo y cada vuelta completa contiene dos enteros más que la anterior. Los primos (en azul) se agrupan a lo largo de curvas: son valores de polinomios cuadráticos $n^2 + bn + c$, como el polinomio de Euler $n^2 + n + 41$, rico en primos. Los primos gemelos, parejas $p$ y $p + 2$ que son ambos primos, aparecen en amarillo. Robert Sacks presentó esta espiral en 1994.`,
+  },
   settle: 2600,
   create(size) {
     const N = 4200
@@ -166,9 +177,15 @@ const sacks: Scene = {
 
 const ulam: Scene = {
   id: 'ulam',
-  name: 'Ulam spiral',
-  formula: String.raw`\text{primes on a square spiral}`,
-  explanation: String.raw`Write $1, 2, 3, \dots$ on a square spiral that starts at the centre, and mark the primes. Stanisław Ulam noticed in 1963 that the primes line up along diagonals. Each diagonal is the set of values of a quadratic polynomial $4n^2 + bn + c$, and some of these polynomials produce far more primes than others. The Hardy–Littlewood conjecture F predicts exactly how many primes such a polynomial should produce. Twin primes are shown in yellow.`,
+  name: { en: 'Ulam spiral', es: 'Espiral de Ulam' },
+  formula: {
+    en: String.raw`\text{primes on a square spiral}`,
+    es: String.raw`\text{primos en una espiral cuadrada}`,
+  },
+  explanation: {
+    en: String.raw`Write $1, 2, 3, \dots$ on a square spiral that starts at the centre, and mark the primes. Stanisław Ulam noticed in 1963 that the primes line up along diagonals. Each diagonal is the set of values of a quadratic polynomial $4n^2 + bn + c$, and some of these polynomials produce far more primes than others. The Hardy–Littlewood conjecture F predicts exactly how many primes such a polynomial should produce. Twin primes are shown in yellow.`,
+    es: String.raw`Escribe $1, 2, 3, \dots$ en una espiral cuadrada que empieza en el centro y marca los primos. Stanisław Ulam notó en 1963 que los primos se alinean en diagonales. Cada diagonal es el conjunto de valores de un polinomio cuadrático $4n^2 + bn + c$, y algunos de estos polinomios producen muchos más primos que otros. La conjetura F de Hardy y Littlewood predice exactamente cuántos primos debería producir cada uno. Los primos gemelos aparecen en amarillo.`,
+  },
   settle: 3000,
   create(size) {
     const K = 71
@@ -238,9 +255,12 @@ const ulam: Scene = {
 
 const fourier: Scene = {
   id: 'fourier',
-  name: 'Fourier epicycles',
-  formula: String.raw`f(t) = \sum_{k} c_k\, e^{ikt}`,
-  explanation: String.raw`A closed curve in the plane can be seen as a periodic function $f : [0, 2\pi] \to \mathbb{C}$ and written as a Fourier series $f(t) = \sum_{k \in \mathbb{Z}} c_k e^{ikt}$, where $c_k = \frac{1}{2\pi}\int_0^{2\pi} f(t)\, e^{-ikt}\, dt$. Each term $c_k e^{ikt}$ is a rotating arrow with length $|c_k|$, speed $k$ and starting angle $\arg c_k$. Chaining the arrows tip to tail (epicycles, the same device Ptolemy used for planetary orbits) traces the curve. Here a star is sampled at 240 points, its discrete Fourier transform is computed, and the 48 largest terms draw it.`,
+  name: { en: 'Fourier epicycles', es: 'Epiciclos de Fourier' },
+  formula: both(String.raw`f(t) = \sum_{k} c_k\, e^{ikt}`),
+  explanation: {
+    en: String.raw`A closed curve in the plane can be seen as a periodic function $f : [0, 2\pi] \to \mathbb{C}$ and written as a Fourier series $f(t) = \sum_{k \in \mathbb{Z}} c_k e^{ikt}$, where $c_k = \frac{1}{2\pi}\int_0^{2\pi} f(t)\, e^{-ikt}\, dt$. Each term $c_k e^{ikt}$ is a rotating arrow with length $|c_k|$, speed $k$ and starting angle $\arg c_k$. Chaining the arrows tip to tail (epicycles, the same device Ptolemy used for planetary orbits) traces the curve. Here a star is sampled at 240 points, its discrete Fourier transform is computed, and the 48 largest terms draw it.`,
+    es: String.raw`Una curva cerrada en el plano puede verse como una función periódica $f : [0, 2\pi] \to \mathbb{C}$ y escribirse como una serie de Fourier $f(t) = \sum_{k \in \mathbb{Z}} c_k e^{ikt}$, donde $c_k = \frac{1}{2\pi}\int_0^{2\pi} f(t)\, e^{-ikt}\, dt$. Cada término $c_k e^{ikt}$ es una flecha que gira, con longitud $|c_k|$, velocidad $k$ y ángulo inicial $\arg c_k$. Al encadenar las flechas una tras otra (epiciclos, el mismo recurso que usó Ptolomeo para las órbitas planetarias) se traza la curva. Aquí se muestrea una estrella en 240 puntos, se calcula su transformada discreta de Fourier y sus 48 términos más grandes la dibujan.`,
+  },
   settle: 9000,
   create(size) {
     // Sample a five-pointed star and take its discrete Fourier transform.
@@ -353,9 +373,12 @@ const fourier: Scene = {
 
 const lorenz: Scene = {
   id: 'lorenz',
-  name: 'Lorenz attractor',
-  formula: String.raw`\dot x = \sigma(y - x),\ \dot y = x(\rho - z) - y,\ \dot z = xy - \beta z`,
-  explanation: String.raw`In 1963 Edward Lorenz reduced a model of atmospheric convection to three equations, $\dot x = \sigma(y - x)$, $\dot y = x(\rho - z) - y$ and $\dot z = xy - \beta z$. With his classic parameters $\sigma = 10$, $\rho = 28$ and $\beta = 8/3$, solutions never settle down and never repeat. Instead they wind forever around a butterfly-shaped strange attractor with fractal dimension $\approx 2.06$. Two trajectories that start almost together separate exponentially fast; this sensitive dependence on initial conditions is the “butterfly effect”. The yellow point follows one trajectory.`,
+  name: { en: 'Lorenz attractor', es: 'Atractor de Lorenz' },
+  formula: both(String.raw`\dot x = \sigma(y - x),\ \dot y = x(\rho - z) - y,\ \dot z = xy - \beta z`),
+  explanation: {
+    en: String.raw`In 1963 Edward Lorenz reduced a model of atmospheric convection to three equations, $\dot x = \sigma(y - x)$, $\dot y = x(\rho - z) - y$ and $\dot z = xy - \beta z$. With his classic parameters $\sigma = 10$, $\rho = 28$ and $\beta = 8/3$, solutions never settle down and never repeat. Instead they wind forever around a butterfly-shaped strange attractor with fractal dimension $\approx 2.06$. Two trajectories that start almost together separate exponentially fast; this sensitive dependence on initial conditions is the “butterfly effect”. The yellow point follows one trajectory.`,
+    es: String.raw`En 1963 Edward Lorenz redujo un modelo de convección atmosférica a tres ecuaciones: $\dot x = \sigma(y - x)$, $\dot y = x(\rho - z) - y$ y $\dot z = xy - \beta z$. Con sus parámetros clásicos $\sigma = 10$, $\rho = 28$ y $\beta = 8/3$, las soluciones nunca se estabilizan ni se repiten. En cambio, giran para siempre alrededor de un atractor extraño con forma de mariposa, de dimensión fractal $\approx 2.06$. Dos trayectorias que empiezan casi juntas se separan exponencialmente rápido; esta dependencia sensible de las condiciones iniciales es el «efecto mariposa». El punto amarillo sigue una trayectoria.`,
+  },
   settle: 5000,
   create(size) {
     const sigma = 10
@@ -432,9 +455,12 @@ const lorenz: Scene = {
 
 const mandelbrot: Scene = {
   id: 'mandelbrot',
-  name: 'Mandelbrot set',
-  formula: String.raw`z \mapsto z^2 + c`,
-  explanation: String.raw`For each complex number $c$, iterate $z_{n+1} = z_n^2 + c$ starting from $z_0 = 0$. The Mandelbrot set $M$ is the set of all $c$ for which the sequence stays bounded; once $|z_n| > 2$ it is guaranteed to escape to infinity. Each point is coloured by how many steps it takes to escape. As the animation raises the number of steps it checks, the boundary $\partial M$ appears, brightest where it is most intricate. Mitsuhiro Shishikura proved in 1998 that this boundary has Hausdorff dimension $2$.`,
+  name: { en: 'Mandelbrot set', es: 'Conjunto de Mandelbrot' },
+  formula: both(String.raw`z \mapsto z^2 + c`),
+  explanation: {
+    en: String.raw`For each complex number $c$, iterate $z_{n+1} = z_n^2 + c$ starting from $z_0 = 0$. The Mandelbrot set $M$ is the set of all $c$ for which the sequence stays bounded; once $|z_n| > 2$ it is guaranteed to escape to infinity. Each point is coloured by how many steps it takes to escape. As the animation raises the number of steps it checks, the boundary $\partial M$ appears, brightest where it is most intricate. Mitsuhiro Shishikura proved in 1998 that this boundary has Hausdorff dimension $2$.`,
+    es: String.raw`Para cada número complejo $c$, itera $z_{n+1} = z_n^2 + c$ a partir de $z_0 = 0$. El conjunto de Mandelbrot $M$ está formado por todos los $c$ para los que la sucesión permanece acotada; en cuanto $|z_n| > 2$, está garantizado que escapa al infinito. Cada punto se colorea según cuántos pasos tarda en escapar. A medida que la animación aumenta el número de pasos que revisa, aparece la frontera $\partial M$, más brillante donde es más intrincada. Mitsuhiro Shishikura demostró en 1998 que esta frontera tiene dimensión de Hausdorff $2$.`,
+  },
   settle: 3200,
   create(size) {
     const MAX = 80
@@ -499,9 +525,12 @@ const mandelbrot: Scene = {
 
 const barnsley: Scene = {
   id: 'barnsley',
-  name: 'Barnsley fern',
-  formula: String.raw`F = \textstyle\bigcup_{i=1}^{4} f_i(F)`,
-  explanation: String.raw`The fern is the attractor of an iterated function system: four affine maps $f_i(\mathbf{x}) = A_i \mathbf{x} + \mathbf{b}_i$. In the “chaos game”, a point is moved by one of the maps chosen at random, with probabilities $1\%$, $85\%$, $7\%$ and $7\%$, over and over. The points it visits fill in the unique compact set $F$ that satisfies $F = f_1(F) \cup f_2(F) \cup f_3(F) \cup f_4(F)$. The $85\%$ map shrinks the whole fern into the next copy up the frond. The two $7\%$ maps make the lowest leaflets on each side (shown in yellow), and the $1\%$ map draws the stem. Michael Barnsley described it in 1988.`,
+  name: { en: 'Barnsley fern', es: 'Helecho de Barnsley' },
+  formula: both(String.raw`F = \textstyle\bigcup_{i=1}^{4} f_i(F)`),
+  explanation: {
+    en: String.raw`The fern is the attractor of an iterated function system: four affine maps $f_i(\mathbf{x}) = A_i \mathbf{x} + \mathbf{b}_i$. In the “chaos game”, a point is moved by one of the maps chosen at random, with probabilities $1\%$, $85\%$, $7\%$ and $7\%$, over and over. The points it visits fill in the unique compact set $F$ that satisfies $F = f_1(F) \cup f_2(F) \cup f_3(F) \cup f_4(F)$. The $85\%$ map shrinks the whole fern into the next copy up the frond. The two $7\%$ maps make the lowest leaflets on each side (shown in yellow), and the $1\%$ map draws the stem. Michael Barnsley described it in 1988.`,
+    es: String.raw`El helecho es el atractor de un sistema de funciones iteradas: cuatro transformaciones afines $f_i(\mathbf{x}) = A_i \mathbf{x} + \mathbf{b}_i$. En el «juego del caos», un punto se mueve una y otra vez con una de las transformaciones, elegida al azar con probabilidades $1\%$, $85\%$, $7\%$ y $7\%$. Los puntos que visita van llenando el único conjunto compacto $F$ que cumple $F = f_1(F) \cup f_2(F) \cup f_3(F) \cup f_4(F)$. La transformación del $85\%$ encoge todo el helecho en la siguiente copia hacia arriba de la fronda. Las dos del $7\%$ forman los folíolos más bajos de cada lado (en amarillo), y la del $1\%$ dibuja el tallo. Michael Barnsley lo describió en 1988.`,
+  },
   settle: 4000,
   create(size) {
     const N = 26000
@@ -578,9 +607,12 @@ const barnsley: Scene = {
 
 const koch: Scene = {
   id: 'koch',
-  name: 'Koch snowflake',
-  formula: String.raw`\dim = \log 4 / \log 3`,
-  explanation: String.raw`Start with an equilateral triangle. Replace the middle third of every edge with two sides of a smaller equilateral triangle, and repeat. Each step multiplies the number of edges by $4$ and divides their length by $3$, so after $n$ steps the perimeter is $3\left(\tfrac{4}{3}\right)^n \to \infty$. Meanwhile the area converges to $\tfrac{8}{5}$ of the original triangle’s: an infinitely long curve around a finite area. The limit is self-similar, with dimension $\log 4 / \log 3 \approx 1.262$. Helge von Koch described it in 1904.`,
+  name: { en: 'Koch snowflake', es: 'Copo de nieve de Koch' },
+  formula: both(String.raw`\dim = \log 4 / \log 3`),
+  explanation: {
+    en: String.raw`Start with an equilateral triangle. Replace the middle third of every edge with two sides of a smaller equilateral triangle, and repeat. Each step multiplies the number of edges by $4$ and divides their length by $3$, so after $n$ steps the perimeter is $3\left(\tfrac{4}{3}\right)^n \to \infty$. Meanwhile the area converges to $\tfrac{8}{5}$ of the original triangle’s: an infinitely long curve around a finite area. The limit is self-similar, with dimension $\log 4 / \log 3 \approx 1.262$. Helge von Koch described it in 1904.`,
+    es: String.raw`Empieza con un triángulo equilátero. Reemplaza el tercio central de cada lado por dos lados de un triángulo equilátero más pequeño, y repite. Cada paso multiplica el número de lados por $4$ y divide su longitud entre $3$, así que después de $n$ pasos el perímetro es $3\left(\tfrac{4}{3}\right)^n \to \infty$. Mientras tanto, el área converge a $\tfrac{8}{5}$ del área del triángulo original: una curva de longitud infinita que encierra un área finita. El límite es autosemejante, con dimensión $\log 4 / \log 3 \approx 1.262$. Helge von Koch la describió en 1904.`,
+  },
   settle: 6000,
   create(size) {
     const LEVELS = 5

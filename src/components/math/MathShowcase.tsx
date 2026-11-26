@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
+import { useL } from '../../i18n/locale.tsx'
+import { messages } from '../../i18n/messages.ts'
 import { scenes, type Frame, type Palette } from './scenes.ts'
 import { MathText, Tex } from './Tex.tsx'
 import styles from './MathShowcase.module.css'
@@ -17,6 +19,8 @@ export default function MathShowcase({ children }: Props) {
   const [index, setIndex] = useState(0)
   const [open, setOpen] = useState(false)
   const panelId = useId()
+  const l = useL()
+  const m = messages.showcase
 
   // Shared with the animation loop without re-running its effect
   const indexRef = useRef(0)
@@ -173,7 +177,7 @@ export default function MathShowcase({ children }: Props) {
             type="button"
             className={styles.nav}
             onClick={() => go(index - 1)}
-            aria-label="Previous animation"
+            aria-label={l(m.previous)}
           >
             ‹
           </button>
@@ -182,9 +186,9 @@ export default function MathShowcase({ children }: Props) {
               {number(index)} / {number(scenes.length - 1)}
             </span>
             <span key={scene.id} className={styles.label}>
-              <span className={styles.name}>{scene.name}</span>
+              <span className={styles.name}>{l(scene.name)}</span>
               <span className={styles.formula}>
-                <Tex>{scene.formula}</Tex>
+                <Tex>{l(scene.formula)}</Tex>
               </span>
             </span>
           </span>
@@ -192,7 +196,7 @@ export default function MathShowcase({ children }: Props) {
             type="button"
             className={styles.nav}
             onClick={() => go(index + 1)}
-            aria-label="Next animation"
+            aria-label={l(m.next)}
           >
             ›
           </button>
@@ -205,7 +209,7 @@ export default function MathShowcase({ children }: Props) {
           aria-controls={panelId}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? 'Hide explanation' : 'See explanation'}
+          {l(open ? m.hide : m.show)}
           <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.chevron}>
             <path d="m6 9 6 6 6-6" />
           </svg>
@@ -218,9 +222,9 @@ export default function MathShowcase({ children }: Props) {
         >
           <div className={styles.panelInner}>
             <p key={scene.id} className={styles.explanation}>
-              <MathText>{scene.explanation}</MathText>
+              <MathText>{l(scene.explanation)}</MathText>
             </p>
-            <p className={styles.note}>Rotation is paused while this is open.</p>
+            <p className={styles.note}>{l(m.paused)}</p>
           </div>
         </div>
       </figcaption>

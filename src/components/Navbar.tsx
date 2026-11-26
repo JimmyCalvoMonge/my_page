@@ -1,18 +1,47 @@
 import { useEffect, useState } from 'react'
 import { profile } from '../data/profile.ts'
+import { locales, useL, useLocale, type Locale } from '../i18n/locale.tsx'
+import { messages } from '../i18n/messages.ts'
 import { CloseIcon, DownloadIcon, MenuIcon } from './Icons.tsx'
 import styles from './Navbar.module.css'
 
+const m = messages.nav
+
 const links = [
-  { href: '#about', label: 'About' },
-  { href: '#research', label: 'Research' },
-  { href: '#teaching', label: 'Teaching' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#about', label: m.about },
+  { href: '#research', label: m.research },
+  { href: '#teaching', label: m.teaching },
+  { href: '#contact', label: m.contact },
 ]
+
+const languageNames: Record<Locale, string> = { en: 'English', es: 'Español' }
+
+function LanguageToggle() {
+  const { locale, setLocale } = useLocale()
+  const l = useL()
+  return (
+    <div className={styles.lang} role="group" aria-label={l(m.language)}>
+      {locales.map((code) => (
+        <button
+          key={code}
+          type="button"
+          lang={code}
+          aria-pressed={locale === code}
+          aria-label={languageNames[code]}
+          title={languageNames[code]}
+          onClick={() => setLocale(code)}
+        >
+          {code.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  )
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const l = useL()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -30,7 +59,7 @@ export default function Navbar() {
 
   return (
     <header className={`${styles.header} ${scrolled || open ? styles.solid : ''}`}>
-      <nav className={`container ${styles.nav}`} aria-label="Main">
+      <nav className={`container ${styles.nav}`} aria-label={l(m.main)}>
         <a href="#top" className={styles.brand} onClick={() => setOpen(false)}>
           <span className={styles.mark} aria-hidden="true">
             ∂
@@ -42,7 +71,7 @@ export default function Navbar() {
           {links.map((link) => (
             <li key={link.href}>
               <a href={link.href} onClick={() => setOpen(false)}>
-                {link.label}
+                {l(link.label)}
               </a>
             </li>
           ))}
@@ -54,16 +83,19 @@ export default function Navbar() {
           </li>
         </ul>
 
-        <button
-          type="button"
-          className={styles.toggle}
-          aria-expanded={open}
-          aria-controls="nav-links"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <CloseIcon /> : <MenuIcon />}
-        </button>
+        <div className={styles.actions}>
+          <LanguageToggle />
+          <button
+            type="button"
+            className={styles.toggle}
+            aria-expanded={open}
+            aria-controls="nav-links"
+            aria-label={l(open ? m.closeMenu : m.openMenu)}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <CloseIcon /> : <MenuIcon />}
+          </button>
+        </div>
       </nav>
     </header>
   )

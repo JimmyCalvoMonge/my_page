@@ -51,7 +51,7 @@
   align-items: center;
   gap: 6px;
   list-style: none;
-  margin: 0;
+  margin: 0 0 0 auto;
   padding: 0;
 }
 
@@ -82,6 +82,44 @@
 
 .links a.cv:hover {
   border-color: var(--accent);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.lang {
+  display: flex;
+  padding: 3px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+}
+
+.lang button {
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.lang button:hover {
+  color: var(--text);
+}
+
+.lang button[aria-pressed='true'] {
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 .toggle {
