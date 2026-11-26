@@ -1,38 +1,60 @@
+/* Contained card with the connecting network as its background */
 .card {
   position: relative;
   overflow: clip;
-  padding: clamp(40px, 7vw, 80px);
+  isolation: isolate;
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) * 1.5);
   background:
-    radial-gradient(ellipse 70% 90% at 100% 0%, rgb(var(--accent-rgb) / 0.2), transparent 60%),
+    radial-gradient(ellipse 70% 90% at 100% 0%, rgb(var(--accent-rgb) / 0.18), transparent 60%),
     var(--surface);
 }
 
-/* Faint concentric rings in the corner */
-.card::after {
-  content: '';
+.card canvas {
   position: absolute;
-  right: -60px;
-  bottom: -60px;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  border: 1px solid rgb(var(--accent-rgb) / 0.18);
-  box-shadow:
-    0 0 0 40px rgb(var(--accent-rgb) / 0.03),
-    0 0 0 80px rgb(var(--accent-rgb) / 0.02);
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Keeps the text readable over the network */
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(20 20 23 / 0.92) 0%,
+    rgb(20 20 23 / 0.7) 45%,
+    rgb(20 20 23 / 0) 80%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  padding: clamp(40px, 7vw, 80px);
 }
 
 .label {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-mono);
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
+}
+
+.label::after {
+  content: '';
+  width: 48px;
+  height: 1px;
+  background: var(--border-strong);
 }
 
 .title {
@@ -42,15 +64,40 @@
 }
 
 .text {
-  margin-top: 16px;
-  max-width: 32em;
+  margin-top: 22px;
+  max-width: 34em;
   font-size: 18px;
   color: var(--text-muted);
 }
 
+.helpLabel {
+  margin-top: 32px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--highlight);
+}
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.services li {
+  padding: 6px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgb(var(--bg-rgb) / 0.6);
+  font-size: 14px;
+  color: var(--text);
+}
+
 .actions {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -59,7 +106,6 @@
 
 .footer {
   padding-block: 32px 40px;
-  border-top: 1px solid var(--border);
   font-size: 14px;
   color: var(--text-faint);
 }
@@ -73,6 +119,12 @@
 .qed {
   font-size: 18px;
   color: var(--text-muted);
+}
+
+@media (max-width: 760px) {
+  .veil {
+    background: rgb(20 20 23 / 0.72);
+  }
 }
 
 @media (max-width: 520px) {

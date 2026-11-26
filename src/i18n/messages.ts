@@ -18,11 +18,10 @@ export const messages = {
     greetingAfter: { en: '!', es: '!' },
     role: { en: 'Mathematician & data engineer.', es: 'Matemático e ingeniero de datos.' },
     lead: {
-      en: 'I studied pure mathematics, taught it at the University of Costa Rica, and now build data platforms. This is where I share my research, course notes and writing on mathematics.',
-      es: 'Estudié matemática pura, la enseñé en la Universidad de Costa Rica y ahora construyo plataformas de datos. Aquí comparto mi investigación, mis notas de curso y textos sobre matemática.',
+      en: 'I studied pure mathematics, taught it at the University of Costa Rica, and today design data platforms as a Senior Data Engineer at IBM. Have a data or math problem on your hands? If you think I can help, let’s connect!',
+      es: 'Estudié matemática pura, la enseñé en la Universidad de Costa Rica y hoy diseño plataformas de datos como Senior Data Engineer en IBM. ¿Tienes un problema de datos o de matemática entre manos? Si crees que puedo ayudarte, ¡hablemos!',
     },
-    seeResearch: { en: 'See my research', es: 'Ver mi investigación' },
-    downloadCv: { en: 'Download CV', es: 'Descargar CV' },
+    connect: { en: 'Let’s connect', es: 'Hablemos' },
     elsewhere: { en: 'Elsewhere', es: 'En otros sitios' },
     email: { en: 'Email', es: 'Correo' },
     portraitAlt: { en: 'Portrait of Jimmy Calvo-Monge', es: 'Retrato de Jimmy Calvo-Monge' },
@@ -84,8 +83,16 @@ export const messages = {
     label: { en: 'Contact', es: 'Contacto' },
     title: { en: 'Let’s connect.', es: 'Hablemos.' },
     text: {
-      en: 'Questions about the notes, a research idea, or a data problem? I’d like to hear from you.',
-      es: '¿Preguntas sobre las notas, una idea de investigación o un problema de datos? Me encantaría saber de ti.',
+      en: 'A data platform to design, a pipeline to fix, a model to build, or a hard math question: tell me what you’re working on and let’s see how I can help.',
+      es: 'Una plataforma de datos por diseñar, un pipeline por arreglar, un modelo por construir o una pregunta difícil de matemática: cuéntame en qué estás trabajando y veamos cómo puedo ayudarte.',
     },
+    helpWith: { en: 'I can help with', es: 'Puedo ayudarte con' },
+    services: [
+      { en: 'Data platforms on Snowflake & AWS', es: 'Plataformas de datos en Snowflake y AWS' },
+      { en: 'Pipelines & dbt models', es: 'Pipelines y modelos en dbt' },
+      { en: 'Migrations to the cloud', es: 'Migraciones a la nube' },
+      { en: 'Machine learning & statistics', es: 'Aprendizaje automático y estadística' },
+      { en: 'Mathematical modelling', es: 'Modelado matemático' },
+    ],
   },
 } satisfies Record<string, Record<string, L10n | L10n[]>>
