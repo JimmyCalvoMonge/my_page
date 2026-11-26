@@ -99,6 +99,12 @@ export type Certification = { name: string; issuer: string; href: string; brand?
 /** Official credential names, kept in English. */
 export const certifications: Certification[] = [
   {
+    name: 'SnowPro Specialty: Gen AI',
+    issuer: 'Snowflake',
+    brand: 'snowflake',
+    href: 'https://achieve.snowflake.com/2b175f37-485b-47a8-9421-603332916de0#acc.9SonbtBy',
+  },
+  {
     name: 'Claude Certified Architect – Foundations',
     issuer: 'Anthropic',
     brand: 'anthropic',
