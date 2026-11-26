@@ -22,10 +22,6 @@
   background: var(--border-strong);
 }
 
-.index {
-  color: var(--highlight);
-}
-
 .title {
   font-size: clamp(32px, 4.6vw, 48px);
 }

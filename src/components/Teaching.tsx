@@ -15,7 +15,6 @@ export default function Teaching() {
     <section className="section" id="teaching">
       <div className="container">
         <SectionHeading
-          index={3}
           label={l(m.label)}
           title={l(m.title)}
           intro={l(m.intro)}

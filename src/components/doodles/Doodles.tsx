@@ -17,7 +17,7 @@ const placements: Placement[] = [
   { Sketch: S.Euler, top: 2.5, left: 31, rotate: -6, mobile: true },
   { Sketch: S.CommSquare, top: 12, left: 1, rotate: 4 },
   { Sketch: S.Gaussian, top: 16.5, left: 33, rotate: 3, mobile: true },
-  { Sketch: S.Pipeline, top: 19.4, left: 50, rotate: -2, mobile: true },
+  { Sketch: S.Pipeline, top: 17.4, left: 50, rotate: -2, mobile: true },
   { Sketch: S.SqlAggregate, top: 26.5, left: 2, rotate: -3, mobile: true },
   { Sketch: S.BigO, top: 31, left: 40, rotate: 4 },
   { Sketch: S.Bayes, top: 34, left: 72, rotate: 5, mobile: true },

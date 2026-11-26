@@ -45,23 +45,25 @@ export const messages = {
     },
     paragraphs: [
       {
-        en: 'I studied pure mathematics at the University of Costa Rica, finishing with a master’s degree in algebraic geometry, and stayed on as a full-time professor for three years.',
-        es: 'Estudié matemática pura en la Universidad de Costa Rica, donde terminé una maestría en geometría algebraica, y me quedé como profesor de tiempo completo durante tres años.',
+        en: 'I studied mathematics at the University of Costa Rica, with a bachelor’s and a master’s in pure mathematics, and taught there as a professor from 2019 to 2022.',
+        es: 'Estudié matemática en la Universidad de Costa Rica, donde hice el bachillerato y la maestría en matemática pura, y fui profesor allí de 2019 a 2022.',
       },
       {
-        en: 'Along the way I wrote class notes, papers and books, and I built this site to share that material with students, teachers and anyone curious about mathematics.',
-        es: 'En ese tiempo escribí notas de clase, artículos y libros, y creé este sitio para compartir ese material con estudiantes, docentes y cualquier persona con curiosidad por la matemática.',
+        en: 'Along the way I wrote class notes and research papers, and I built this site to share that material with students, teachers and anyone curious about mathematics.',
+        es: 'En ese tiempo escribí notas de clase y artículos de investigación, y creé este sitio para compartir ese material con estudiantes, docentes y cualquier persona con curiosidad por la matemática.',
       },
       {
-        en: 'Since then I’ve moved into industry: first as a statistician and data scientist at Intel, and now as a data engineer at Hakkoda. I also hold master’s degrees in applied mathematical methods and in full stack web development.',
-        es: 'Después pasé a la industria: primero como estadístico y científico de datos en Intel, y ahora como ingeniero de datos en Hakkoda. También tengo maestrías en métodos matemáticos aplicados y en desarrollo web full stack.',
+        en: 'Since then I’ve moved into industry: first as a statistician and data scientist at Intel, then as a data engineer at Hakkoda, and now as a Senior Data Engineer at IBM, building data platforms with Snowflake, dbt, AWS and Python. I also hold master’s degrees in applied mathematics and in full stack web development.',
+        es: 'Después pasé a la industria: primero como estadístico y científico de datos en Intel, luego como ingeniero de datos en Hakkoda y ahora como Senior Data Engineer en IBM, construyendo plataformas de datos con Snowflake, dbt, AWS y Python. También tengo maestrías en matemática aplicada y en desarrollo web full stack.',
       },
     ],
     experience: { en: 'Experience', es: 'Experiencia' },
     education: { en: 'Education', es: 'Formación' },
+    certifications: { en: 'Certifications', es: 'Certificaciones' },
     now: { en: 'Now', es: 'Actual' },
   },
   research: {
+    with: { en: 'with', es: 'con' },
     label: { en: 'Research & writing', es: 'Investigación y escritos' },
     title: { en: 'Papers, theses and articles', es: 'Artículos, tesis y textos' },
     intro: {

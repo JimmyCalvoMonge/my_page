@@ -35,10 +35,6 @@
   color: var(--text-muted);
 }
 
-.label span {
-  color: var(--highlight);
-}
-
 .title {
   margin-top: 18px;
   font-size: clamp(40px, 6vw, 64px);

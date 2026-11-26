@@ -15,7 +15,7 @@ export default function Contact() {
       <div className="container">
         <div ref={ref} className={`${styles.card} reveal`}>
           <p className={styles.label}>
-            <span>§4</span> {l(m.label)}
+            {l(m.label)}
           </p>
           <h2 className={styles.title}>{l(m.title)}</h2>
           <p className={styles.text}>{l(m.text)}</p>

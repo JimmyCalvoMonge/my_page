@@ -1,4 +1,4 @@
-import papers, { sourceOf } from '../data/research.ts'
+import papers from '../data/research.ts'
 import { useReveal } from '../hooks/useReveal.ts'
 import { useL } from '../i18n/locale.tsx'
 import { messages } from '../i18n/messages.ts'
@@ -15,7 +15,6 @@ export default function Research() {
     <section className={`section ${styles.section}`} id="research">
       <div className="container">
         <SectionHeading
-          index={2}
           label={l(m.label)}
           title={l(m.title)}
           intro={l(m.intro)}
@@ -28,12 +27,17 @@ export default function Research() {
                 <span className={styles.year}>{paper.year}</span>
                 <span className={styles.main}>
                   <span className={styles.title}>{paper.title}</span>
+                  {paper.coauthors && (
+                    <span className={styles.coauthors}>
+                      {l(m.with)} {paper.coauthors}
+                    </span>
+                  )}
                   <span className={styles.summary}>{l(paper.summary)}</span>
                 </span>
                 <span className={styles.meta}>
                   <span className={styles.topic}>{l(paper.topic)}</span>
                   <span className={styles.source}>
-                    {sourceOf(paper.link)}
+                    {l(paper.venue)}
                     <ArrowUpRightIcon width={16} height={16} />
                   </span>
                 </span>
