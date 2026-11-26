@@ -4,6 +4,7 @@ import { useL } from '../i18n/locale.tsx'
 import { messages } from '../i18n/messages.ts'
 import { ArrowUpRightIcon } from './Icons.tsx'
 import SectionHeading from './SectionHeading.tsx'
+import WritingPen from './WritingPen.tsx'
 import styles from './Research.module.css'
 
 export default function Research() {
@@ -21,6 +22,11 @@ export default function Research() {
         />
 
         <ol ref={ref} className={`${styles.list} reveal`}>
+          <WritingPen
+            listRef={ref}
+            yearSelector={`.${styles.year}`}
+            writtenClass={styles.yearWritten}
+          />
           {papers.map((paper) => (
             <li key={paper.title}>
               <a href={paper.link} target="_blank" rel="noreferrer" className={styles.item}>
