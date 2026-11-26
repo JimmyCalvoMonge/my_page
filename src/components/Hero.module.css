@@ -30,7 +30,7 @@
 .title {
   font-size: clamp(44px, 7vw, 80px);
   line-height: 1.02;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.045em;
 }
 
 /* Sit the text level with the middle of the animation on wide screens */

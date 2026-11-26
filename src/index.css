@@ -1,6 +1,5 @@
-@import '@fontsource-variable/inter';
-@import '@fontsource-variable/space-grotesk';
-@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
 @import '@fontsource-variable/caveat';
 
 :root {
@@ -25,9 +24,9 @@
   --highlight-soft: rgb(var(--highlight-rgb) / 0.14);
 
   /* Type */
-  --font-display: 'Space Grotesk Variable', 'Inter Variable', system-ui, sans-serif;
-  --font-body: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-display: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* Layout */
   --container: 1160px;
@@ -85,7 +84,7 @@ h4 {
   font-family: var(--font-display);
   font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   margin: 0;
   text-wrap: balance;
 }
