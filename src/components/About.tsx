@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react'
 import { certifications, education, experience } from '../data/profile.ts'
 import { useReveal } from '../hooks/useReveal.ts'
 import { useL } from '../i18n/locale.tsx'
@@ -8,9 +7,19 @@ import { ArrowUpRightIcon } from './Icons.tsx'
 import SectionHeading from './SectionHeading.tsx'
 import styles from './About.module.css'
 
-/** Newest entries sit on the highest, right-most step. */
-const step = (index: number, count: number) =>
-  ({ '--step': count - 1 - index }) as CSSProperties
+/** Left-hand drawing for one entry: a node, fed by a flow line from the entry below. */
+function PipelineGutter({ current, last }: { current: boolean; last: boolean }) {
+  return (
+    <span className={styles.gutter} aria-hidden="true">
+      {!last && (
+        <svg className={styles.flow} viewBox="0 0 28 100" preserveAspectRatio="none">
+          <path d="M14 100 L14 0" vectorEffect="non-scaling-stroke" />
+        </svg>
+      )}
+      <span className={`${styles.node} ${current ? styles.nodeCurrent : ''}`} />
+    </span>
+  )
+}
 
 export default function About() {
   const bodyRef = useReveal<HTMLDivElement>()
@@ -34,9 +43,10 @@ export default function About() {
           <div ref={listsRef} className={`${styles.lists} reveal`}>
             <div>
               <h3 className={styles.listTitle}>{l(m.experience)}</h3>
-              <ol className={styles.stairs}>
+              <ol className={styles.pipeline}>
                 {experience.map((item, i) => (
-                  <li key={item.place.en + item.role.en} style={step(i, experience.length)}>
+                  <li key={item.place.en + item.role.en}>
+                    <PipelineGutter current={i === 0} last={i === experience.length - 1} />
                     <p className={styles.itemTitle}>
                       {l(item.role)}
                       {item.current && <span className={styles.badge}>{l(m.now)}</span>}
@@ -51,9 +61,10 @@ export default function About() {
 
             <div>
               <h3 className={styles.listTitle}>{l(m.education)}</h3>
-              <ol className={styles.stairs}>
+              <ol className={styles.pipeline}>
                 {education.map((item, i) => (
-                  <li key={item.degree.en} style={step(i, education.length)}>
+                  <li key={item.degree.en}>
+                    <PipelineGutter current={i === 0} last={i === education.length - 1} />
                     <p className={styles.itemTitle}>{l(item.degree)}</p>
                     <p className={styles.itemPlace}>
                       {item.href ? (

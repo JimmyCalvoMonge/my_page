@@ -32,42 +32,72 @@
   margin-bottom: 20px;
 }
 
-/* Staircase: each entry is a step, older entries step down to the left */
-.stairs {
-  --step-size: 40px;
+/* Data pipeline: each entry is a node, fed by a dashed line from the one below */
+.pipeline {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.stairs li {
+.pipeline li {
   position: relative;
-  margin-left: calc(var(--step) * var(--step-size));
-  padding: 16px 4px 24px 20px;
-  border-top: 1.5px solid var(--border-strong);
-  border-left: 1.5px solid var(--border-strong);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.03), transparent 75%);
+  padding: 0 0 26px 40px;
 }
 
-/* The square "nosing" at each step's corner */
-.stairs li::before {
-  content: '';
+.pipeline li:last-child {
+  padding-bottom: 0;
+}
+
+.gutter {
   position: absolute;
-  left: -5px;
-  top: -5px;
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 28px;
 }
 
-/* The top step is where things stand now */
-.stairs li:first-child {
+.flow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 100%;
+  overflow: visible;
+}
+
+.flow path {
+  stroke: rgb(var(--accent-rgb) / 0.7);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 5;
+  animation: stream 1.2s linear infinite;
+}
+
+@keyframes stream {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+.node {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 18px;
+  height: 13px;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1.5px solid var(--accent);
+}
+
+.nodeCurrent {
   border-color: var(--highlight);
-  background: linear-gradient(180deg, rgb(var(--highlight-rgb) / 0.07), transparent 75%);
+  background: color-mix(in srgb, rgb(var(--highlight-rgb)) 14%, var(--bg));
 }
 
-.stairs li:first-child::before {
-  background: var(--highlight);
+@media (prefers-reduced-motion: reduce) {
+  .flow path {
+    animation: none;
+  }
 }
 
 .itemTitle {
@@ -195,18 +225,8 @@
   color: var(--text-faint);
 }
 
-@media (max-width: 960px) {
-  .stairs {
-    --step-size: 24px;
-  }
-}
-
 @media (max-width: 560px) {
   .lists {
     grid-template-columns: 1fr;
-  }
-
-  .stairs {
-    --step-size: 14px;
   }
 }
