@@ -1,5 +1,12 @@
 .section {
-  background: linear-gradient(180deg, transparent, var(--bg-raised) 18%, var(--bg-raised) 82%, transparent);
+  /* A translucent tint, so the background doodles still show through */
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgb(255 255 255 / 0.018) 18%,
+    rgb(255 255 255 / 0.018) 82%,
+    transparent
+  );
 }
 
 .list {

@@ -1,6 +1,7 @@
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/space-grotesk';
 @import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource-variable/caveat';
 
 :root {
   /* Colour: black and neutral grays, with blue as the main accent and yellow as the highlight */
@@ -118,6 +119,11 @@ button {
 ::selection {
   background: var(--accent);
   color: #fff;
+}
+
+.page {
+  position: relative;
+  isolation: isolate;
 }
 
 .container {

@@ -1,0 +1,61 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: clip;
+  pointer-events: none;
+  user-select: none;
+  color: var(--text-muted);
+  opacity: 0.11;
+}
+
+.item {
+  position: absolute;
+  transform-origin: top left;
+}
+
+.item svg {
+  display: block;
+  overflow: visible;
+}
+
+.hand {
+  font-family: 'Caveat Variable', 'Bradley Hand', cursive;
+  font-weight: 500;
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+
+.accent {
+  fill: var(--accent);
+}
+
+.highlight {
+  fill: var(--highlight);
+}
+
+.accentStroke {
+  stroke: var(--accent);
+}
+
+.highlightStroke {
+  stroke: var(--highlight);
+}
+
+.highlightFill {
+  fill: var(--highlight);
+  stroke: var(--highlight);
+}
+
+@media (max-width: 760px) {
+  .desktopOnly {
+    display: none;
+  }
+
+  .item {
+    scale: 0.62;
+  }
+}
