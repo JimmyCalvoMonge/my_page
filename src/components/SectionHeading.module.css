@@ -1,0 +1,37 @@
+.heading {
+  max-width: 720px;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.label::after {
+  content: '';
+  width: 48px;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+.index {
+  color: var(--accent);
+}
+
+.title {
+  font-size: clamp(32px, 4.6vw, 48px);
+}
+
+.intro {
+  margin-top: 18px;
+  font-size: 18px;
+  color: var(--text-muted);
+}

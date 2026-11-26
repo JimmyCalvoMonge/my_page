@@ -1,0 +1,145 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--nav-height);
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.solid {
+  background: rgba(10, 13, 20, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--border);
+}
+
+.nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(91, 140, 255, 0.35);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 18px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.links a {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 15px;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: var(--text);
+}
+
+.cvItem {
+  margin-left: 10px;
+}
+
+.links a.cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+}
+
+.links a.cv:hover {
+  border-color: var(--accent);
+}
+
+.toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  cursor: pointer;
+  place-items: center;
+}
+
+@media (max-width: 760px) {
+  .toggle {
+    display: grid;
+  }
+
+  .links {
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px var(--gutter) 24px;
+    background: rgba(10, 13, 20, 0.97);
+    border-bottom: 1px solid var(--border);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      visibility 0.2s;
+  }
+
+  .links.open {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .links a {
+    padding: 12px 4px;
+    font-size: 17px;
+    border-radius: 0;
+  }
+
+  .cvItem {
+    margin: 12px 0 0;
+  }
+
+  .links a.cv {
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 999px;
+  }
+}
