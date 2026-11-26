@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { scenes, type Frame, type Palette } from './scenes.ts'
+import { MathText, Tex } from './Tex.tsx'
 import styles from './MathShowcase.module.css'
 
+/** How long each scene stays up before the next one, while not paused. */
 const SCENE_MS = 11000
 const FADE_MS = 700
 
@@ -13,15 +15,26 @@ type Props = {
 export default function MathShowcase({ children }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [index, setIndex] = useState(0)
+  const [open, setOpen] = useState(false)
+  const panelId = useId()
+
+  // Shared with the animation loop without re-running its effect
   const indexRef = useRef(0)
-  const startRef = useRef(0)
+  const sceneStartRef = useRef(0) // drives each scene's own animation
+  const slotRef = useRef(0) // time spent on this scene while not paused
+  const pausedRef = useRef(false)
 
   const go = useCallback((next: number) => {
     const i = (next + scenes.length) % scenes.length
     indexRef.current = i
-    startRef.current = performance.now()
+    sceneStartRef.current = performance.now()
+    slotRef.current = 0
     setIndex(i)
   }, [])
+
+  useEffect(() => {
+    pausedRef.current = open
+  }, [open])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -38,7 +51,8 @@ export default function MathShowcase({ children }: Props) {
 
     let size = 0
     let frame = 0
-    let visible = true
+    let lastNow = 0
+    let hiddenAt = 0
     let shownIndex = -1
     let drawer: ((f: Frame) => void) | null = null
     const cache = new Map<string, (f: Frame) => void>()
@@ -73,8 +87,13 @@ export default function MathShowcase({ children }: Props) {
         drawer = drawerFor(i)
         shownIndex = i
       }
-      const elapsed = now - startRef.current
-      const t = reduceMotion ? scenes[i].settle : elapsed
+
+      // Cap the step so a background tab doesn't skip scenes on return
+      const dt = lastNow ? Math.min(100, now - lastNow) : 0
+      lastNow = now
+      if (!pausedRef.current) slotRef.current += dt
+
+      const t = reduceMotion ? scenes[i].settle : now - sceneStartRef.current
       ctx.clearRect(0, 0, size, size)
       drawer?.({ ctx, size, t, palette })
 
@@ -82,18 +101,18 @@ export default function MathShowcase({ children }: Props) {
         canvas.style.opacity = '1'
         return
       }
-      const fadeIn = Math.min(1, elapsed / FADE_MS)
-      const fadeOut = Math.min(1, (SCENE_MS - elapsed) / FADE_MS)
+      const fadeIn = Math.min(1, t / FADE_MS)
+      const fadeOut = pausedRef.current ? 1 : Math.min(1, (SCENE_MS - slotRef.current) / FADE_MS)
       canvas.style.opacity = String(Math.max(0, Math.min(fadeIn, fadeOut)))
-      if (elapsed >= SCENE_MS) go(i + 1)
+      if (!pausedRef.current && slotRef.current >= SCENE_MS) go(i + 1)
     }
 
     const tick = (now: number) => {
       render(now)
-      if (visible && !reduceMotion) frame = requestAnimationFrame(tick)
+      frame = requestAnimationFrame(tick)
     }
 
-    startRef.current = performance.now()
+    sceneStartRef.current = performance.now()
     resize()
 
     const ro = new ResizeObserver(() => {
@@ -113,17 +132,16 @@ export default function MathShowcase({ children }: Props) {
       }
     }
 
-    let pausedAt = 0
+    // Only animate while the canvas is on screen; resume where it left off
     const io = new IntersectionObserver(([entry]) => {
-      const wasVisible = visible
-      visible = entry.isIntersecting
       cancelAnimationFrame(frame)
-      if (visible) {
-        // Resume the current scene where it left off
-        if (!wasVisible) startRef.current = performance.now() - pausedAt
+      if (entry.isIntersecting) {
+        if (hiddenAt) sceneStartRef.current += performance.now() - hiddenAt
+        hiddenAt = 0
+        lastNow = 0
         frame = requestAnimationFrame(tick)
       } else {
-        pausedAt = performance.now() - startRef.current
+        hiddenAt = performance.now()
       }
     })
     io.observe(canvas)
@@ -150,31 +168,61 @@ export default function MathShowcase({ children }: Props) {
       </div>
 
       <figcaption className={styles.caption}>
+        <div className={styles.bar}>
+          <button
+            type="button"
+            className={styles.nav}
+            onClick={() => go(index - 1)}
+            aria-label="Previous animation"
+          >
+            ‹
+          </button>
+          <span className={styles.text} aria-live="polite">
+            <span className={styles.count}>
+              {number(index)} / {number(scenes.length - 1)}
+            </span>
+            <span key={scene.id} className={styles.label}>
+              <span className={styles.name}>{scene.name}</span>
+              <span className={styles.formula}>
+                <Tex>{scene.formula}</Tex>
+              </span>
+            </span>
+          </span>
+          <button
+            type="button"
+            className={styles.nav}
+            onClick={() => go(index + 1)}
+            aria-label="Next animation"
+          >
+            ›
+          </button>
+        </div>
+
         <button
           type="button"
-          className={styles.nav}
-          onClick={() => go(index - 1)}
-          aria-label="Previous animation"
+          className={styles.toggle}
+          aria-expanded={open}
+          aria-controls={panelId}
+          onClick={() => setOpen((v) => !v)}
         >
-          ‹
+          {open ? 'Hide explanation' : 'See explanation'}
+          <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.chevron}>
+            <path d="m6 9 6 6 6-6" />
+          </svg>
         </button>
-        <span className={styles.text} aria-live="polite">
-          <span className={styles.count}>
-            {number(index)} / {number(scenes.length - 1)}
-          </span>
-          <span key={scene.id} className={styles.label}>
-            <span className={styles.name}>{scene.name}</span>
-            <span className={styles.formula}>{scene.formula}</span>
-          </span>
-        </span>
-        <button
-          type="button"
-          className={styles.nav}
-          onClick={() => go(index + 1)}
-          aria-label="Next animation"
+
+        <div
+          id={panelId}
+          className={`${styles.panel} ${open ? styles.panelOpen : ''}`}
+          inert={!open}
         >
-          ›
-        </button>
+          <div className={styles.panelInner}>
+            <p key={scene.id} className={styles.explanation}>
+              <MathText>{scene.explanation}</MathText>
+            </p>
+            <p className={styles.note}>Rotation is paused while this is open.</p>
+          </div>
+        </div>
       </figcaption>
     </figure>
   )

@@ -11,7 +11,7 @@ export default function Hero() {
         <div className={styles.copy}>
           <h1 className={styles.title}>
             Hi, I’m <span className={styles.name}>Jimmy</span>
-            <span className={styles.stop}>.</span>
+            <span className={styles.stop}>!</span>
             <span className={styles.role}>Mathematician &amp; data engineer.</span>
           </h1>
 

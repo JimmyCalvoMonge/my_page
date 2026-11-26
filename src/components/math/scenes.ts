@@ -23,7 +23,10 @@ export type Frame = {
 export type Scene = {
   id: string
   name: string
+  /** Short LaTeX formula shown under the name. */
   formula: string
+  /** Plain-language explanation; inline LaTeX goes between $...$. */
+  explanation: string
   /** Time (ms) by which the scene is fully built; used for a still frame. */
   settle: number
   /** Precompute anything size-dependent and return the per-frame drawer. */
@@ -72,12 +75,65 @@ function dots(
   ctx.globalAlpha = 1
 }
 
-/* 1. Sacks spiral ---------------------------------------------------------- */
+/* 1. Lissajous curve ------------------------------------------------------- */
+
+const lissajous: Scene = {
+  id: 'lissajous',
+  name: 'Lissajous curve',
+  formula: String.raw`x = \sin(5t + \delta),\ y = \sin(4t)`,
+  explanation: String.raw`A Lissajous curve is the path of a point that oscillates in two perpendicular directions at once: $x(t) = \sin(at + \delta)$ and $y(t) = \sin(bt)$. Here $a = 5$ and $b = 4$. Because $a/b$ is rational, the curve closes up after one period. Its shape depends only on the ratio $a : b$ and the phase shift $\delta$. In the animation $\delta$ drifts slowly, so the figure seems to turn in three dimensions. Nathaniel Bowditch studied these curves in 1815 and Jules Antoine Lissajous in 1857; they appear on an oscilloscope when two signals are compared.`,
+  settle: 2500,
+  create(size) {
+    const c = size / 2
+    const A = radius(size) * 0.68
+    const STEPS = 900
+    return ({ ctx, t, palette }) => {
+      const delta = t * 0.00045
+      const shown = Math.floor(easeOut(t / 2500) * STEPS)
+      const at = (u: number) =>
+        [c + A * Math.sin(5 * u + delta), c - A * Math.sin(4 * u)] as const
+
+      // Faint echo of where the curve was a moment ago
+      ctx.beginPath()
+      for (let i = 0; i <= shown; i++) {
+        const u = (i / STEPS) * TAU
+        const x = c + A * Math.sin(5 * u + delta - 0.25)
+        const y = c - A * Math.sin(4 * u)
+        if (i === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+      }
+      ctx.strokeStyle = palette.gray
+      ctx.globalAlpha = 0.35
+      ctx.lineWidth = 1
+      ctx.stroke()
+      ctx.globalAlpha = 1
+
+      ctx.beginPath()
+      for (let i = 0; i <= shown; i++) {
+        const [x, y] = at((i / STEPS) * TAU)
+        if (i === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+      }
+      ctx.strokeStyle = palette.blue
+      ctx.lineWidth = 1.6
+      ctx.stroke()
+
+      const [hx, hy] = at(t * 0.0012)
+      ctx.beginPath()
+      ctx.arc(hx, hy, 3.5, 0, TAU)
+      ctx.fillStyle = palette.yellow
+      ctx.fill()
+    }
+  },
+}
+
+/* 2. Sacks spiral ---------------------------------------------------------- */
 
 const sacks: Scene = {
   id: 'sacks',
   name: 'Sacks spiral',
-  formula: 'r = √n,  θ = 2π√n',
+  formula: String.raw`r = \sqrt{n},\ \theta = 2\pi\sqrt{n}`,
+  explanation: String.raw`Each positive integer $n$ is placed at polar coordinates $(r, \theta) = (\sqrt{n},\, 2\pi\sqrt{n})$. A perfect square $n = k^2$ lands at angle $2\pi k$, so all the squares line up on a single ray and each full turn holds two more integers than the one before. The primes (blue) gather along curves: these are values of quadratic polynomials $n^2 + bn + c$, such as Euler’s prime-rich $n^2 + n + 41$. Twin primes, pairs $p$ and $p + 2$ that are both prime, are shown in yellow. Robert Sacks introduced the spiral in 1994.`,
   settle: 2600,
   create(size) {
     const N = 4200
@@ -106,12 +162,13 @@ const sacks: Scene = {
   },
 }
 
-/* 2. Ulam spiral ----------------------------------------------------------- */
+/* 3. Ulam spiral ----------------------------------------------------------- */
 
 const ulam: Scene = {
   id: 'ulam',
   name: 'Ulam spiral',
-  formula: 'primes on a square spiral',
+  formula: String.raw`\text{primes on a square spiral}`,
+  explanation: String.raw`Write $1, 2, 3, \dots$ on a square spiral that starts at the centre, and mark the primes. Stanisław Ulam noticed in 1963 that the primes line up along diagonals. Each diagonal is the set of values of a quadratic polynomial $4n^2 + bn + c$, and some of these polynomials produce far more primes than others. The Hardy–Littlewood conjecture F predicts exactly how many primes such a polynomial should produce. Twin primes are shown in yellow.`,
   settle: 3000,
   create(size) {
     const K = 71
@@ -177,12 +234,13 @@ const ulam: Scene = {
   },
 }
 
-/* 3. Fourier epicycles ----------------------------------------------------- */
+/* 4. Fourier epicycles ----------------------------------------------------- */
 
 const fourier: Scene = {
   id: 'fourier',
   name: 'Fourier epicycles',
-  formula: 'f(t) = Σ cₖ e^{ikt}',
+  formula: String.raw`f(t) = \sum_{k} c_k\, e^{ikt}`,
+  explanation: String.raw`A closed curve in the plane can be seen as a periodic function $f : [0, 2\pi] \to \mathbb{C}$ and written as a Fourier series $f(t) = \sum_{k \in \mathbb{Z}} c_k e^{ikt}$, where $c_k = \frac{1}{2\pi}\int_0^{2\pi} f(t)\, e^{-ikt}\, dt$. Each term $c_k e^{ikt}$ is a rotating arrow with length $|c_k|$, speed $k$ and starting angle $\arg c_k$. Chaining the arrows tip to tail (epicycles, the same device Ptolemy used for planetary orbits) traces the curve. Here a star is sampled at 240 points, its discrete Fourier transform is computed, and the 48 largest terms draw it.`,
   settle: 9000,
   create(size) {
     // Sample a five-pointed star and take its discrete Fourier transform.
@@ -291,63 +349,13 @@ const fourier: Scene = {
   },
 }
 
-/* 4. Lissajous curve ------------------------------------------------------- */
-
-const lissajous: Scene = {
-  id: 'lissajous',
-  name: 'Lissajous curve',
-  formula: 'x = sin(5t + δ),  y = sin(4t)',
-  settle: 2500,
-  create(size) {
-    const c = size / 2
-    const A = radius(size) * 0.68
-    const STEPS = 900
-    return ({ ctx, t, palette }) => {
-      const delta = t * 0.00045
-      const shown = Math.floor(easeOut(t / 2500) * STEPS)
-      const at = (u: number) =>
-        [c + A * Math.sin(5 * u + delta), c - A * Math.sin(4 * u)] as const
-
-      // Faint echo of where the curve was a moment ago
-      ctx.beginPath()
-      for (let i = 0; i <= shown; i++) {
-        const u = (i / STEPS) * TAU
-        const x = c + A * Math.sin(5 * u + delta - 0.25)
-        const y = c - A * Math.sin(4 * u)
-        if (i === 0) ctx.moveTo(x, y)
-        else ctx.lineTo(x, y)
-      }
-      ctx.strokeStyle = palette.gray
-      ctx.globalAlpha = 0.35
-      ctx.lineWidth = 1
-      ctx.stroke()
-      ctx.globalAlpha = 1
-
-      ctx.beginPath()
-      for (let i = 0; i <= shown; i++) {
-        const [x, y] = at((i / STEPS) * TAU)
-        if (i === 0) ctx.moveTo(x, y)
-        else ctx.lineTo(x, y)
-      }
-      ctx.strokeStyle = palette.blue
-      ctx.lineWidth = 1.6
-      ctx.stroke()
-
-      const [hx, hy] = at(t * 0.0012)
-      ctx.beginPath()
-      ctx.arc(hx, hy, 3.5, 0, TAU)
-      ctx.fillStyle = palette.yellow
-      ctx.fill()
-    }
-  },
-}
-
 /* 5. Lorenz attractor ------------------------------------------------------ */
 
 const lorenz: Scene = {
   id: 'lorenz',
   name: 'Lorenz attractor',
-  formula: 'ẋ = σ(y − x),  ẏ = x(ρ − z) − y,  ż = xy − βz',
+  formula: String.raw`\dot x = \sigma(y - x),\ \dot y = x(\rho - z) - y,\ \dot z = xy - \beta z`,
+  explanation: String.raw`In 1963 Edward Lorenz reduced a model of atmospheric convection to three equations, $\dot x = \sigma(y - x)$, $\dot y = x(\rho - z) - y$ and $\dot z = xy - \beta z$. With his classic parameters $\sigma = 10$, $\rho = 28$ and $\beta = 8/3$, solutions never settle down and never repeat. Instead they wind forever around a butterfly-shaped strange attractor with fractal dimension $\approx 2.06$. Two trajectories that start almost together separate exponentially fast; this sensitive dependence on initial conditions is the “butterfly effect”. The yellow point follows one trajectory.`,
   settle: 5000,
   create(size) {
     const sigma = 10
@@ -425,7 +433,8 @@ const lorenz: Scene = {
 const mandelbrot: Scene = {
   id: 'mandelbrot',
   name: 'Mandelbrot set',
-  formula: 'z ↦ z² + c',
+  formula: String.raw`z \mapsto z^2 + c`,
+  explanation: String.raw`For each complex number $c$, iterate $z_{n+1} = z_n^2 + c$ starting from $z_0 = 0$. The Mandelbrot set $M$ is the set of all $c$ for which the sequence stays bounded; once $|z_n| > 2$ it is guaranteed to escape to infinity. Each point is coloured by how many steps it takes to escape. As the animation raises the number of steps it checks, the boundary $\partial M$ appears, brightest where it is most intricate. Mitsuhiro Shishikura proved in 1998 that this boundary has Hausdorff dimension $2$.`,
   settle: 3200,
   create(size) {
     const MAX = 80
@@ -491,7 +500,8 @@ const mandelbrot: Scene = {
 const barnsley: Scene = {
   id: 'barnsley',
   name: 'Barnsley fern',
-  formula: 'four affine maps, chosen at random',
+  formula: String.raw`F = \textstyle\bigcup_{i=1}^{4} f_i(F)`,
+  explanation: String.raw`The fern is the attractor of an iterated function system: four affine maps $f_i(\mathbf{x}) = A_i \mathbf{x} + \mathbf{b}_i$. In the “chaos game”, a point is moved by one of the maps chosen at random, with probabilities $1\%$, $85\%$, $7\%$ and $7\%$, over and over. The points it visits fill in the unique compact set $F$ that satisfies $F = f_1(F) \cup f_2(F) \cup f_3(F) \cup f_4(F)$. The $85\%$ map shrinks the whole fern into the next copy up the frond. The two $7\%$ maps make the lowest leaflets on each side (shown in yellow), and the $1\%$ map draws the stem. Michael Barnsley described it in 1988.`,
   settle: 4000,
   create(size) {
     const N = 26000
@@ -569,7 +579,8 @@ const barnsley: Scene = {
 const koch: Scene = {
   id: 'koch',
   name: 'Koch snowflake',
-  formula: 'dimension = log 4 / log 3',
+  formula: String.raw`\dim = \log 4 / \log 3`,
+  explanation: String.raw`Start with an equilateral triangle. Replace the middle third of every edge with two sides of a smaller equilateral triangle, and repeat. Each step multiplies the number of edges by $4$ and divides their length by $3$, so after $n$ steps the perimeter is $3\left(\tfrac{4}{3}\right)^n \to \infty$. Meanwhile the area converges to $\tfrac{8}{5}$ of the original triangle’s: an infinitely long curve around a finite area. The limit is self-similar, with dimension $\log 4 / \log 3 \approx 1.262$. Helge von Koch described it in 1904.`,
   settle: 6000,
   create(size) {
     const LEVELS = 5
@@ -651,93 +662,13 @@ const koch: Scene = {
   },
 }
 
-/* 9. Cantor function ------------------------------------------------------- */
-
-function cantor(x: number, depth: number): number {
-  let result = 0
-  let weight = 0.5
-  for (let i = 0; i < depth; i++) {
-    x *= 3
-    const digit = Math.min(2, Math.floor(x))
-    x -= digit
-    if (digit === 1) return result + weight
-    if (digit === 2) result += weight
-    weight /= 2
-  }
-  return result + 2 * weight * x
-}
-
-const cantorScene: Scene = {
-  id: 'cantor',
-  name: 'Cantor function',
-  formula: "the devil's staircase",
-  settle: 6000,
-  create(size) {
-    const c = size / 2
-    const half = radius(size) * 0.7
-    const left = c - half
-    const bottom = c + half
-    const side = half * 2
-    const SAMPLES = 900
-    const MAX_DEPTH = 8
-
-    return ({ ctx, t, palette }) => {
-      const depth = Math.min(MAX_DEPTH, Math.floor(t / 700))
-
-      // Axes
-      ctx.beginPath()
-      ctx.moveTo(left, bottom - side)
-      ctx.lineTo(left, bottom)
-      ctx.lineTo(left + side, bottom)
-      ctx.strokeStyle = palette.gray
-      ctx.globalAlpha = 0.5
-      ctx.lineWidth = 1
-      ctx.stroke()
-      ctx.globalAlpha = 1
-
-      // Staircase at the current depth
-      ctx.beginPath()
-      for (let i = 0; i <= SAMPLES; i++) {
-        const x = i / SAMPLES
-        const px = left + x * side
-        const py = bottom - cantor(x, depth) * side
-        if (i === 0) ctx.moveTo(px, py)
-        else ctx.lineTo(px, py)
-      }
-      ctx.strokeStyle = palette.blue
-      ctx.lineWidth = 1.7
-      ctx.stroke()
-
-      // The Cantor set at this depth, drawn under the axis
-      let intervals: [number, number][] = [[0, 1]]
-      for (let d = 0; d < Math.min(depth, 6); d++) {
-        const next: [number, number][] = []
-        for (const [a, b] of intervals) {
-          const third = (b - a) / 3
-          next.push([a, a + third], [b - third, b])
-        }
-        intervals = next
-      }
-      ctx.beginPath()
-      for (const [a, b] of intervals) {
-        ctx.moveTo(left + a * side, bottom + 14)
-        ctx.lineTo(left + b * side, bottom + 14)
-      }
-      ctx.strokeStyle = palette.yellow
-      ctx.lineWidth = 3
-      ctx.stroke()
-    }
-  },
-}
-
 export const scenes: Scene[] = [
+  lissajous,
   sacks,
   ulam,
   fourier,
-  lissajous,
   lorenz,
   mandelbrot,
   barnsley,
   koch,
-  cantorScene,
 ]

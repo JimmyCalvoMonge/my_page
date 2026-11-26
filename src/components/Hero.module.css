@@ -22,7 +22,8 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  align-items: center;
+  /* Top-aligned so opening the explanation doesn't move the text */
+  align-items: start;
   gap: clamp(32px, 6vw, 80px);
 }
 
@@ -30,6 +31,13 @@
   font-size: clamp(44px, 7vw, 80px);
   line-height: 1.02;
   letter-spacing: -0.035em;
+}
+
+/* Sit the text level with the middle of the animation on wide screens */
+@media (min-width: 901px) {
+  .copy {
+    padding-top: clamp(24px, 4.5vw, 64px);
+  }
 }
 
 .name {
