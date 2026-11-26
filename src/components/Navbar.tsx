@@ -64,7 +64,7 @@ export default function Navbar() {
           <span className={styles.mark} aria-hidden="true">
             ∂
           </span>
-          Jimmy Calvo
+          {profile.name}
         </a>
 
         <ul className={`${styles.links} ${open ? styles.open : ''}`} id="nav-links">

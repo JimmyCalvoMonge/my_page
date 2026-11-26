@@ -2,7 +2,7 @@ import type { Brand } from '../components/BrandLogo.tsx'
 import type { L10n } from '../i18n/locale.tsx'
 
 export const profile = {
-  name: 'Jimmy Calvo-Monge',
+  name: 'Jimmy Calvo Monge',
   firstName: 'Jimmy',
   email: 'jimjocamon94@gmail.com',
   github: 'https://github.com/JimmyCalvoMonge',

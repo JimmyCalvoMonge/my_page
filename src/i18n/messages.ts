@@ -24,7 +24,7 @@ export const messages = {
     connect: { en: 'Let’s connect', es: 'Hablemos' },
     elsewhere: { en: 'Elsewhere', es: 'En otros sitios' },
     email: { en: 'Email', es: 'Correo' },
-    portraitAlt: { en: 'Portrait of Jimmy Calvo-Monge', es: 'Retrato de Jimmy Calvo-Monge' },
+    portraitAlt: { en: 'Portrait of Jimmy Calvo Monge', es: 'Retrato de Jimmy Calvo Monge' },
   },
   showcase: {
     previous: { en: 'Previous animation', es: 'Animación anterior' },

@@ -1,4 +1,4 @@
-# Jimmy Calvo-Monge — personal site
+# Jimmy Calvo Monge — personal site
 
 A bilingual, math-themed portfolio for a mathematician and data engineer. It brings together research, course notes, experience and certifications, and invites visitors with a data or math problem to get in touch.
 
