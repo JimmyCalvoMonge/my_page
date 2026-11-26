@@ -2,7 +2,7 @@
 
 A bilingual, math-themed portfolio for a mathematician and data engineer. It brings together research, course notes, experience and certifications, and invites visitors with a data or math problem to get in touch.
 
-**Live site:** https://jimmycalvomonge.vercel.app
+**Live site:** https://jimmycalvomonge.com
 
 ## Highlights
 
@@ -142,6 +142,17 @@ The site deploys to Vercel. `vercel.json` sets:
 - a fallback that serves `index.html` for every path, so client-side routes load on refresh.
 
 Each push to `main` deploys to production, and each pull request gets a preview deployment.
+
+### Domain
+
+The site is served at `jimmycalvomonge.com`, a domain registered with GoDaddy, which also hosts its DNS. Two records point it at Vercel:
+
+| Type | Name | Value |
+|---|---|---|
+| A | `@` | `216.198.79.1` |
+| CNAME | `www` | the project-specific `*.vercel-dns-017.com` address shown in Vercel |
+
+Vercel lists the domains, which one is primary, and their HTTPS certificates under **Project Settings → Domains**. The `jimmycalvomonge.vercel.app` address keeps working too.
 
 ## Legacy site
 
