@@ -60,7 +60,7 @@
 .title {
   margin-top: 18px;
   font-size: clamp(40px, 6vw, 64px);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 
 .text {
