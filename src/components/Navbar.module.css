@@ -31,6 +31,7 @@
   font-weight: 500;
   font-size: 20px;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .mark {
@@ -201,5 +202,19 @@
     height: 48px;
     padding: 0 8px 0 20px;
     border-radius: 999px;
+  }
+}
+
+/* Keep the full name on one line next to the language switch on phones */
+@media (max-width: 420px) {
+  .brand {
+    gap: 10px;
+    font-size: 17px;
+  }
+
+  .mark {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
   }
 }
