@@ -25,6 +25,10 @@
   --accent-soft: rgb(var(--accent-rgb) / 0.14);
   --highlight: rgb(var(--highlight-rgb));
   --highlight-soft: rgb(var(--highlight-rgb) / 0.14);
+  /* Opaque blue tints for filled pills */
+  --accent-tint: color-mix(in srgb, rgb(var(--accent-rgb)) 16%, #0e0e11);
+  --accent-tint-hover: color-mix(in srgb, rgb(var(--accent-rgb)) 26%, #0e0e11);
+  --accent-ink: color-mix(in srgb, rgb(var(--accent-rgb)) 45%, #ffffff);
 
   /* Type */
   --font-display: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
@@ -174,6 +178,26 @@ button {
 
 .btn-primary:hover {
   background: var(--accent-strong);
+}
+
+.btn-trailing {
+  gap: 14px;
+  padding-right: 6px;
+}
+
+.btn-circle {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+.btn-trailing:hover .btn-circle {
+  transform: rotate(45deg);
 }
 
 .btn-ghost {

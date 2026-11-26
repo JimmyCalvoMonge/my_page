@@ -77,8 +77,10 @@ export default function Navbar() {
           ))}
           <li className={styles.cvItem}>
             <a href={profile.cv} target="_blank" rel="noreferrer" className={styles.cv}>
-              <DownloadIcon width={16} height={16} />
               CV
+              <span className={styles.cvIcon} aria-hidden="true">
+                <DownloadIcon width={16} height={16} />
+              </span>
             </a>
           </li>
         </ul>

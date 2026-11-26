@@ -81,7 +81,7 @@ export const messages = {
   },
   contact: {
     label: { en: 'Contact', es: 'Contacto' },
-    title: { en: 'Let’s connect.', es: 'Hablemos.' },
+    title: { en: 'Let’s connect!', es: '¡Hablemos!' },
     text: {
       en: 'A data platform to design, a pipeline to fix, a model to build, or a hard math question: tell me what you’re working on and let’s see how I can help.',
       es: 'Una plataforma de datos por diseñar, un pipeline por arreglar, un modelo por construir o una pregunta difícil de matemática: cuéntame en qué estás trabajando y veamos cómo puedo ayudarte.',

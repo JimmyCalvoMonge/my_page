@@ -2,7 +2,7 @@ import photo from '../assets/jimmy.jpg'
 import { profile } from '../data/profile.ts'
 import { useL } from '../i18n/locale.tsx'
 import { messages } from '../i18n/messages.ts'
-import { ArrowRightIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons.tsx'
+import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons.tsx'
 import MathShowcase from './math/MathShowcase.tsx'
 import styles from './Hero.module.css'
 
@@ -24,9 +24,11 @@ export default function Hero() {
           <p className={styles.lead}>{l(m.lead)}</p>
 
           <div className={styles.actions}>
-            <a href="#contact" className="btn btn-primary">
+            <a href="#contact" className="btn btn-primary btn-trailing">
               {l(m.connect)}
-              <ArrowRightIcon />
+              <span className="btn-circle" aria-hidden="true">
+                <ArrowUpRightIcon />
+              </span>
             </a>
           </div>
 

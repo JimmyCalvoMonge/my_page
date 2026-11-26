@@ -75,13 +75,28 @@
 .links a.cv {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  border: 1px solid var(--border-strong);
-  color: var(--text);
+  gap: 10px;
+  height: 40px;
+  padding: 0 4px 0 16px;
+  background: var(--accent-tint);
+  color: var(--accent-ink);
+  font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
 .links a.cv:hover {
-  border-color: var(--accent);
+  background: var(--accent-tint-hover);
+  color: var(--accent-ink);
+}
+
+.cvIcon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
 }
 
 .actions {
@@ -93,19 +108,24 @@
 
 .lang {
   display: flex;
-  padding: 3px;
-  border: 1px solid var(--border-strong);
+  align-items: center;
+  height: 40px;
+  padding: 4px;
   border-radius: 999px;
+  background: var(--accent-tint);
 }
 
 .lang button {
-  padding: 5px 10px;
+  height: 32px;
+  min-width: 40px;
+  padding: 0 10px;
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: var(--text-faint);
+  color: var(--accent-ink);
   font-family: var(--font-mono);
   font-size: 12px;
+  font-weight: 500;
   letter-spacing: 0.04em;
   cursor: pointer;
   transition:
@@ -114,21 +134,22 @@
 }
 
 .lang button:hover {
-  color: var(--text);
+  background: var(--accent-tint-hover);
 }
 
 .lang button[aria-pressed='true'] {
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: var(--accent);
+  color: #fff;
 }
 
 .toggle {
   display: none;
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  border: 1px solid var(--border-strong);
-  background: transparent;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--accent-tint);
+  color: var(--accent-ink);
   cursor: pointer;
   place-items: center;
 }
@@ -176,8 +197,9 @@
 
   .links a.cv {
     display: flex;
-    justify-content: center;
-    padding: 12px;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 8px 0 20px;
     border-radius: 999px;
   }
 }
