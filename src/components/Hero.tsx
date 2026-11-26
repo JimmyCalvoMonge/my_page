@@ -1,7 +1,7 @@
 import photo from '../assets/jimmy.jpg'
 import { profile } from '../data/profile.ts'
 import { ArrowRightIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons.tsx'
-import PrimeSpiral from './PrimeSpiral.tsx'
+import MathShowcase from './math/MathShowcase.tsx'
 import styles from './Hero.module.css'
 
 export default function Hero() {
@@ -9,13 +9,9 @@ export default function Hero() {
     <section className={styles.hero} id="top">
       <div className={`container ${styles.inner}`}>
         <div className={styles.copy}>
-          <p className={styles.kicker}>
-            <span className={styles.dot} aria-hidden="true" />
-            Data Engineer at Hakkoda
-          </p>
-
           <h1 className={styles.title}>
-            Hi, I’m <span className={styles.name}>Jimmy</span>.
+            Hi, I’m <span className={styles.name}>Jimmy</span>
+            <span className={styles.stop}>.</span>
             <span className={styles.role}>Mathematician &amp; data engineer.</span>
           </h1>
 
@@ -55,21 +51,13 @@ export default function Hero() {
           </ul>
         </div>
 
-        <figure className={styles.visual}>
-          <div className={styles.stage}>
-            <PrimeSpiral />
+        <div className={styles.visual}>
+          <MathShowcase>
             <div className={styles.portrait}>
               <img src={photo} alt="Portrait of Jimmy Calvo-Monge" width={863} height={900} />
             </div>
-          </div>
-          <figcaption className={styles.caption}>
-            <span>r = √n, θ = 2π√n</span>
-            <span className={styles.legend}>
-              <i className={styles.prime} /> primes
-              <i className={styles.twin} /> twin primes
-            </span>
-          </figcaption>
-        </figure>
+          </MathShowcase>
+        </div>
       </div>
     </section>
   )

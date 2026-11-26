@@ -8,13 +8,6 @@ export const profile = {
   cv: '/CV_Jimmy_Calvo_Monge.pdf',
 }
 
-export const stats = [
-  { value: '3', label: "Master's degrees" },
-  { value: '8', label: 'Papers & articles' },
-  { value: '4', label: 'Sets of course notes' },
-  { value: '3', label: 'Years teaching at UCR' },
-]
-
 export const experience = [
   {
     role: 'Data Engineer',

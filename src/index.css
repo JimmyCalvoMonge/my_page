@@ -3,20 +3,25 @@
 @import '@fontsource-variable/jetbrains-mono';
 
 :root {
-  /* Colour */
-  --bg: #0a0d14;
-  --bg-raised: #0f131d;
-  --surface: #131826;
-  --surface-hover: #182032;
+  /* Colour: black and neutral grays, with blue as the main accent and yellow as the highlight */
+  --bg-rgb: 8 8 10;
+  --accent-rgb: 64 140 255;
+  --highlight-rgb: 250 204 21;
+
+  --bg: rgb(var(--bg-rgb));
+  --bg-raised: #0e0e11;
+  --surface: #141417;
+  --surface-hover: #1b1b1f;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
-  --text: #e8ecf4;
-  --text-muted: #96a0b5;
-  --text-faint: #646e84;
-  --accent: #5b8cff;
-  --accent-strong: #3d74ff;
-  --accent-soft: rgba(91, 140, 255, 0.14);
-  --highlight: #f5b544;
+  --text: #ededef;
+  --text-muted: #a1a1aa;
+  --text-faint: #6b6b74;
+  --accent: rgb(var(--accent-rgb));
+  --accent-strong: #2b7cf6;
+  --accent-soft: rgb(var(--accent-rgb) / 0.14);
+  --highlight: rgb(var(--highlight-rgb));
+  --highlight-soft: rgb(var(--highlight-rgb) / 0.14);
 
   /* Type */
   --font-display: 'Space Grotesk Variable', 'Inter Variable', system-ui, sans-serif;

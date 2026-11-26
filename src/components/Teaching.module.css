@@ -21,7 +21,7 @@
 }
 
 .card:hover {
-  border-color: rgba(91, 140, 255, 0.45);
+  border-color: rgb(var(--accent-rgb) / 0.45);
   transform: translateY(-4px);
 }
 
@@ -31,7 +31,7 @@
   aspect-ratio: 4 / 3;
   padding: 20px;
   background:
-    radial-gradient(circle at 50% 120%, rgba(91, 140, 255, 0.22), transparent 70%),
+    radial-gradient(circle at 50% 120%, rgb(var(--accent-rgb) / 0.22), transparent 70%),
     var(--bg-raised);
   border-bottom: 1px solid var(--border);
 }
@@ -60,7 +60,7 @@
 .course {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--accent);
+  color: var(--highlight);
 }
 
 .title {

@@ -1,11 +1,11 @@
 .card {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
   padding: clamp(40px, 7vw, 80px);
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) * 1.5);
   background:
-    radial-gradient(ellipse 70% 90% at 100% 0%, rgba(91, 140, 255, 0.2), transparent 60%),
+    radial-gradient(ellipse 70% 90% at 100% 0%, rgb(var(--accent-rgb) / 0.2), transparent 60%),
     var(--surface);
 }
 
@@ -18,10 +18,10 @@
   width: 320px;
   height: 320px;
   border-radius: 50%;
-  border: 1px solid rgba(91, 140, 255, 0.18);
+  border: 1px solid rgb(var(--accent-rgb) / 0.18);
   box-shadow:
-    0 0 0 40px rgba(91, 140, 255, 0.03),
-    0 0 0 80px rgba(91, 140, 255, 0.02);
+    0 0 0 40px rgb(var(--accent-rgb) / 0.03),
+    0 0 0 80px rgb(var(--accent-rgb) / 0.02);
   pointer-events: none;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .label span {
-  color: var(--accent);
+  color: var(--highlight);
 }
 
 .title {
